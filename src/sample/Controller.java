@@ -6,6 +6,6 @@ public class Controller {
 
     @FXML
     protected void login() {
-        System.out.println("김민준 병신새기");
+        System.out.println("김민준 die");
     }
 }

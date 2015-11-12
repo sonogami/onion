@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("onion.fxml"));
         Scene scene = new Scene(root, 480, 400);
         primaryStage.setTitle("Onion");
         primaryStage.setScene(scene);

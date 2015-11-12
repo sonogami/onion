@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="480.0"
+      xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="sample.Controller">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="151.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" >
+         <image>
+            <Image url="file:image/logobeta.png" />
+         </image>
+      </ImageView>
+      <TextField layoutX="196.0" layoutY="212.0" prefHeight="27.0" prefWidth="203.0" fx:id="text"/>
+      <ImageView fitHeight="34.0" fitWidth="82.0" layoutX="94.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="file:image/id.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="34.0" fitWidth="92.0" layoutX="104.0" layoutY="271.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="file:image/pw.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="LOGIN" fitHeight="49.0" fitWidth="103.0" layoutX="191.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#login">
+         <image>
+            <Image url="file:image/login.png" />
+         </image>
+      </ImageView>
+      <PasswordField layoutX="196.0" layoutY="275.0" prefHeight="27.0" prefWidth="203.0" fx:id="pwfield"/>
+   </children>
+</Pane>

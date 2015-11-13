@@ -54,6 +54,9 @@
          <image>
             <Image url="@../image/menu_timer.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView fitHeight="16.0" fitWidth="28.0" layoutX="335.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -84,16 +87,25 @@
          <image>
             <Image url="@../image/btnClick.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView fitHeight="32.0" fitWidth="131.0" layoutX="913.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/btnClick.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView fitHeight="32.0" fitWidth="131.0" layoutX="620.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/btnClick.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView fitHeight="27.0" fitWidth="47.0" layoutX="383.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
          <image>

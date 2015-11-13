@@ -19,23 +19,10 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.initStyle(StageStyle.UNDECORATED);
 
-        Parent root = FXMLLoader.load(getClass().getResource("onion.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("onion.fxml"));
+        Parent root = loader.load();
 
-        // movable
-        root.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                xOffset = event.getSceneX();
-                yOffset = event.getSceneY();
-            }
-        });
-        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                primaryStage.setX(event.getScreenX() - xOffset);
-                primaryStage.setY(event.getScreenY() - yOffset);
-            }
-        });
+        ((Controller)loader.getController()).setDragFunction(primaryStage);
 
         Scene scene = new Scene(root, 1100, 733);
         primaryStage.setTitle("Onion");

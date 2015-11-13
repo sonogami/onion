@@ -1,35 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
+<?import javafx.scene.*?>
+<?import java.lang.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="480.0"
-      xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="sample.Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="151.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" >
+      <ImageView fitHeight="733.0" fitWidth="256.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="file:image/logobeta.png" />
-         </image>
-      </ImageView>
-      <TextField layoutX="196.0" layoutY="212.0" prefHeight="27.0" prefWidth="203.0" fx:id="text"/>
-      <ImageView fitHeight="34.0" fitWidth="82.0" layoutX="94.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../image/Layer2.png" />
+         </image></ImageView>
+      <ImageView fx:id="exit_b" fitHeight="20.0" fitWidth="20.0" layoutX="1048.0" layoutY="21.0" onMouseClicked="#btnExit_Clicked" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="file:image/id.png" />
+            <Image url="@../image/exit_b.png" />
          </image>
-      </ImageView>
-      <ImageView fitHeight="34.0" fitWidth="92.0" layoutX="104.0" layoutY="271.0" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="1007.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="file:image/pw.png" />
+            <Image url="@../image/mini_b.png" />
          </image>
-      </ImageView>
-      <ImageView fx:id="LOGIN" fitHeight="49.0" fitWidth="103.0" layoutX="191.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#login">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
+      <ImageView fitHeight="20.0" fitWidth="113.0" layoutX="43.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="file:image/login.png" />
+            <Image url="@../image/menu_1.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
-      <PasswordField layoutX="196.0" layoutY="275.0" prefHeight="27.0" prefWidth="203.0" fx:id="pwfield"/>
+      <ImageView fitHeight="20.0" fitWidth="113.0" layoutX="43.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/menu_2.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fitHeight="20.0" fitWidth="113.0" layoutX="43.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/menu_3.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
    </children>
 </Pane>

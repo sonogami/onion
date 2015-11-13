@@ -19,7 +19,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
-      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="1007.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id ="btnmin"fitHeight="20.0" fitWidth="20.0" layoutX="1007.0" layoutY="21.0" onMouseClicked="#btnMin_Clicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/mini_b.png" />
          </image>

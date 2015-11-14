@@ -247,7 +247,78 @@
                </cursor>
             </ImageView>
          </children></Pane>
-      <Pane id="p3" fx:id="p5" layoutX="0.0" layoutY="0.0" prefHeight="733.0" prefWidth="1100.0" visible="false" />
+      <Pane id="p5" fx:id="p5" layoutX="0.0" layoutY="0.0" prefHeight="733.0" prefWidth="1100.0" visible="false">
+         <children>
+            <ImageView fitHeight="33.0" fitWidth="60.0" layoutX="647.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/pane_setting/label_setting.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="17.0" fitWidth="99.0" layoutX="409.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/pane_setting/label_excel.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="17.0" fitWidth="119.0" layoutX="389.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/pane_setting/label_random1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="17.0" fitWidth="119.0" layoutX="389.0" layoutY="407.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/pane_setting/label_random2.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="41.0" fitWidth="357.0" layoutX="533.0" layoutY="255.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/pane_setting/inputBox_setting.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="41.0" fitWidth="357.0" layoutX="533.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/pane_setting/inputBox_setting.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="41.0" fitWidth="357.0" layoutX="533.0" layoutY="395.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/pane_setting/inputBox_setting.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="37.0" fitWidth="39.0" layoutX="904.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/pane_setting/btnFileSearch.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="37.0" fitWidth="39.0" layoutX="904.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/pane_setting/btnFileSearch.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="37.0" fitWidth="39.0" layoutX="904.0" layoutY="397.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/pane_setting/btnFileSearch.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="39.0" fitWidth="553.0" layoutX="388.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/pane_setting/btnSave.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+
+         </children>
+      </Pane>
       <ImageView fitHeight="733.0" fitWidth="256.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/Layer2.png" />

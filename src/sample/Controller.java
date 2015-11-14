@@ -1,7 +1,5 @@
 package sample;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,12 +15,44 @@ import java.io.FileOutputStream;
 
 public class Controller {
     static HSSFRow row;     // 열
-    Pane p1, p2;
     private Stage stage;
+
+    private double xOffset = 0;
+    private double yOffset = 0;
+
+    private int grade_test = 2;
+    private int class_test = 5;
+
+    private Student[] students = new Student[] {new Student("김민준",3),new Student("김재원",3),new Student("양파맨",1)};
 
     @FXML
     protected ImageView draggableImage;
+    @FXML
+    protected ImageView onion1;
+    @FXML
+    protected ImageView onion2;
+    @FXML
+    protected ImageView onion3;
+    @FXML
+    protected ImageView onion4;
+    @FXML
+    protected ImageView menu1;
+    @FXML
+    protected ImageView menu2;
+    @FXML
+    protected ImageView menu3;
+    @FXML
+    protected ImageView menu4;
+    @FXML
+    protected Pane p1;
+    @FXML
+    protected Pane p2;
+    @FXML
+    protected Pane p3;
+    @FXML
+    protected Pane p4;
 
+    //
 
     public void setDragFunction(Stage stage) {
         this.stage = stage;
@@ -43,26 +73,67 @@ public class Controller {
         });
     }
 
+    @FXML
     public void btnExit_Clicked(Event event) {
         System.exit(0);
     }
 
+    @FXML
     public void btnMin_Clicked(Event event) {stage.setIconified(true);}
 
+    @FXML
     public void menu1(Event event) {
-
+        p1.setVisible(true);
+        p2.setVisible(false);
+        p3.setVisible(false);
+        p4.setVisible(false);
     }
 
+    @FXML
     public void menu2(Event event) {
-
+        p1.setVisible(false);
+        p2.setVisible(true);
+        p3.setVisible(false);
+        p4.setVisible(false);
     }
 
-    private double xOffset = 0;
-    private double yOffset = 0;
+    @FXML
+    public void menu3(Event event) {
+        p1.setVisible(false);
+        p2.setVisible(false);
+        p3.setVisible(true);
+        p4.setVisible(false);
+    }
+
+    @FXML
+    public void menu4(Event event) {
+        p1.setVisible(false);
+        p2.setVisible(false);
+        p3.setVisible(false);
+        p4.setVisible(true);
+    }
 
 
-    public void btnExcel_Clicked(Event event) {/*
-        Student students[] = new Student[]{};
+    @FXML
+    public void btnOnion(Event event){
+        draggableImage.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+            }
+        });
+        draggableImage.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                stage.setX(event.getScreenX() - xOffset);
+                stage.setY(event.getScreenY() - yOffset);
+            }
+        });
+    }
+
+    @FXML
+    public void btnExcel_Clicked(Event event) {
         HSSFWorkbook workbook = new HSSFWorkbook();
 
         //Sheet명 설정
@@ -73,7 +144,7 @@ public class Controller {
         row.createCell(0).setCellValue("학생명");
         row.createCell(1).setCellValue("양파갯수");
 
-        for(int i = 0;  i < student_test.length; i++) {
+        for(int i = 0;  i < students.length; i++) {
             row = sheet.createRow(i+1);
             row.createCell(0).setCellValue(students[i].getName());
             row.createCell(1).setCellValue(students[i].getOnion());
@@ -89,6 +160,6 @@ public class Controller {
             System.out.println("출력 완료");
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
     }
 }

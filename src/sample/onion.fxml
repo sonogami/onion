@@ -46,7 +46,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="32.0" fitWidth="131.0" layoutX="913.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="32.0" fitWidth="131.0" layoutX="913.0" layoutY="77.0" onMouseClicked="#btnExcel_Clicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/btnClick.png" />
                </image>
@@ -161,7 +161,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="121.0" fitWidth="121.0" layoutX="826.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="onion1" fitHeight="121.0" fitWidth="121.0" layoutX="826.0" layoutY="208.0" onMouseClicked="#btnOnion" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/onion_1.png" />
                </image>
@@ -169,7 +169,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="121.0" fitWidth="121.0" layoutX="923.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="onion2" fitHeight="121.0" fitWidth="121.0" layoutX="923.0" layoutY="302.0" onMouseClicked="#btnOnion" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/onion_2.png" />
                </image>
@@ -177,7 +177,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="121.0" fitWidth="121.0" layoutX="826.0" layoutY="395.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="onion3" fitHeight="121.0" fitWidth="121.0" layoutX="826.0" layoutY="395.0" onMouseClicked="#btnOnion" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/onion_3.png" />
                </image>
@@ -185,7 +185,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="121.0" fitWidth="121.0" layoutX="918.0" layoutY="496.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="onion4" fitHeight="121.0" fitWidth="121.0" layoutX="918.0" layoutY="496.0" onMouseClicked="#btnOnion" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/onion_-1.png" />
                </image>
@@ -194,6 +194,8 @@
                </cursor>
             </ImageView>
          </children></Pane>
+      <Pane id="p3" fx:id="p3" layoutX="20.0" layoutY="20.0" prefHeight="733.0" prefWidth="1100.0" />
+      <Pane id="p4" fx:id="p4" layoutX="30.0" layoutY="30.0" prefHeight="733.0" prefWidth="1100.0" />
       <ImageView fitHeight="733.0" fitWidth="256.0" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/Layer2.png" />
@@ -215,7 +217,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="20.0" fitWidth="133.0" layoutX="43.0" layoutY="141.0" onMouseClicked="#menu1" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="menu1" fitHeight="20.0" fitWidth="133.0" layoutX="43.0" layoutY="141.0" onMouseClicked="#menu1" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/menu_1.png" />
          </image>
@@ -223,7 +225,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="20.0" fitWidth="133.0" layoutX="43.0" layoutY="191.0" onMouseClicked="#menu2" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="menu2" fitHeight="20.0" fitWidth="133.0" layoutX="43.0" layoutY="191.0" onMouseClicked="#menu2" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/menu_2.png" />
          </image>
@@ -231,7 +233,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="20.0" fitWidth="133.0" layoutX="43.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="menu3" fitHeight="20.0" fitWidth="133.0" layoutX="43.0" layoutY="241.0" onMouseClicked="#menu3" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/menu_3.png" />
          </image>
@@ -239,7 +241,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="20.0" fitWidth="78.0" layoutX="43.0" layoutY="291.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="menu4" fitHeight="20.0" fitWidth="78.0" layoutX="43.0" layoutY="291.0" onMouseClicked="#menu4" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/menu_timer.png" />
          </image>

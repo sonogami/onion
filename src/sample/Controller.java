@@ -137,7 +137,13 @@ public class Controller {
         HSSFWorkbook workbook = new HSSFWorkbook();
 
         //Sheet명 설정
-        HSSFSheet sheet = workbook.createSheet(grade_test + "학년" + class_test + "반");
+        for(int i = 2; i < 4; i++) {
+            for(int j = 1; j < 7; j++)
+                workbook.createSheet(i + "학년" + j + "반");
+        }
+
+
+        HSSFSheet sheet = workbook.getSheet(grade_test + "학년" + class_test + "반");
 
         //출력
         row = sheet.createRow(0);

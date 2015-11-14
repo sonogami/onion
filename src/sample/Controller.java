@@ -51,6 +51,8 @@ public class Controller {
     protected Pane p3;
     @FXML
     protected Pane p4;
+    @FXML
+    protected Pane p5;
 
     //
 
@@ -87,6 +89,7 @@ public class Controller {
         p2.setVisible(false);
         p3.setVisible(false);
         p4.setVisible(false);
+        p5.setVisible(false);
     }
 
     @FXML
@@ -95,6 +98,7 @@ public class Controller {
         p2.setVisible(true);
         p3.setVisible(false);
         p4.setVisible(false);
+        p5.setVisible(false);
     }
 
     @FXML
@@ -103,6 +107,7 @@ public class Controller {
         p2.setVisible(false);
         p3.setVisible(true);
         p4.setVisible(false);
+        p5.setVisible(false);
     }
 
     @FXML
@@ -111,6 +116,7 @@ public class Controller {
         p2.setVisible(false);
         p3.setVisible(false);
         p4.setVisible(true);
+        p5.setVisible(false);
     }
 
 
@@ -167,5 +173,14 @@ public class Controller {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    public void Settings_Clicked(Event event){
+        p1.setVisible(false);
+        p2.setVisible(false);
+        p3.setVisible(false);
+        p4.setVisible(false);
+        p5.setVisible(true);
     }
 }

@@ -159,7 +159,7 @@ public class Controller {
         // 출력 파일 위치및 파일명 설정
         FileOutputStream outFile;
         try {
-            outFile = new FileOutputStream(grade_test + "_" + class_test + ".xls");
+            outFile = new FileOutputStream("output.xls");
             workbook.write(outFile);
             outFile.close();
 

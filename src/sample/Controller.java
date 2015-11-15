@@ -75,6 +75,74 @@ public class Controller {
         });
     }
 
+    public void setDragOnion1(Stage stage){
+        onion1.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = onion1.getLayoutX() + 60;
+                yOffset = onion1.getLayoutY() + 60;
+            }
+        });
+        onion1.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                onion1.setX(event.getSceneX() - xOffset);
+                onion1.setY(event.getSceneY() - yOffset);
+            }
+        });
+    }
+
+    public void setDragOnion2(Stage stage){
+        onion2.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = onion2.getLayoutX() + 60;
+                yOffset = onion2.getLayoutY() + 60;
+            }
+        });
+        onion2.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                onion2.setX(event.getSceneX() - xOffset);
+                onion2.setY(event.getSceneY() - yOffset);
+            }
+        });
+    }
+
+    public void setDragOnion3(Stage stage){
+        onion3.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = onion3.getLayoutX() + 60;
+                yOffset = onion3.getLayoutY() + 60;
+            }
+        });
+        onion3.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                onion3.setX(event.getSceneX() - xOffset);
+                onion3.setY(event.getSceneY() - yOffset);
+            }
+        });
+    }
+
+    public void setDragOnion4(Stage stage){
+        onion4.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = onion4.getLayoutX() + 60;
+                yOffset = onion4.getLayoutY() + 60;
+            }
+        });
+        onion4.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                onion4.setX(event.getSceneX() - xOffset);
+                onion4.setY(event.getSceneY() - yOffset);
+            }
+        });
+    }
+
     @FXML
     public void btnExit_Clicked(Event event) {
         System.exit(0);

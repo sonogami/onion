@@ -64,8 +64,6 @@ public class Controller {
     @FXML
     protected TextField sec;
 
-    //
-
     public void setDragFunction(Stage stage) {
         this.stage = stage;
 

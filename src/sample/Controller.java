@@ -83,7 +83,7 @@ public class Controller {
         });
     }
 
-    public void setDragOnion1(Stage stage){
+    public void setDragOnion(Stage stage){
         onion1.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -98,9 +98,7 @@ public class Controller {
                 onion1.setY(event.getSceneY() - yOffset);
             }
         });
-    }
 
-    public void setDragOnion2(Stage stage){
         onion2.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -115,9 +113,7 @@ public class Controller {
                 onion2.setY(event.getSceneY() - yOffset);
             }
         });
-    }
 
-    public void setDragOnion3(Stage stage){
         onion3.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -132,9 +128,8 @@ public class Controller {
                 onion3.setY(event.getSceneY() - yOffset);
             }
         });
-    }
 
-    public void setDragOnion4(Stage stage){
+
         onion4.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {

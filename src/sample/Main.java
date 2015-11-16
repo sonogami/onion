@@ -20,10 +20,7 @@ public class Main extends Application {
         Parent root = loader.load();
 
         ((Controller)loader.getController()).setDragFunction(primaryStage);
-        ((Controller)loader.getController()).setDragOnion1(primaryStage);
-        ((Controller)loader.getController()).setDragOnion2(primaryStage);
-        ((Controller)loader.getController()).setDragOnion3(primaryStage);
-        ((Controller)loader.getController()).setDragOnion4(primaryStage);
+        ((Controller)loader.getController()).setDragOnion(primaryStage);
 
         Scene scene = new Scene(root, 1100, 733);
         primaryStage.setTitle("Onion");

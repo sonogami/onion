@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.*?>
 <?import java.lang.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
+<?import sample.NumberTextField?>
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <Pane id="p1" fx:id="p1" prefHeight="733.0" prefWidth="1100.0">
+      <Pane id="p1" fx:id="p1" prefHeight="733.0" prefWidth="1100.0" visible="false">
          <children>
             <ImageView fitHeight="16.0" fitWidth="28.0" layoutX="335.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -195,7 +197,7 @@
 
       </Pane>
       <Pane id="p3" fx:id="p3" layoutX="0.0" layoutY="0.0" prefHeight="733.0" prefWidth="1100.0" visible="false" />
-      <Pane id="p4" fx:id="p4" layoutX="0.0" layoutY="0.0" prefHeight="733.0" prefWidth="1100.0" visible="false">
+      <Pane id="p4" fx:id="p4" layoutX="0.0" layoutY="0.0" prefHeight="733.0" prefWidth="1100.0">
          <children>
             <ImageView fitHeight="32.0" fitWidth="87.0" layoutX="634.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -222,7 +224,7 @@
                   <Image url="@../image/pane_timer/Sec.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="39.0" fitWidth="253.0" layoutX="415.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="39.0" fitWidth="253.0" layoutX="415.0" layoutY="460.0" onMouseClicked="#btnStart_Clicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/pane_timer/btnStart.png" />
                </image>
@@ -246,6 +248,16 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
+            <NumberTextField fx:id="min" alignment="CENTER" layoutX="421.0" layoutY="376.0" prefHeight="27.0" prefWidth="198.0" style="-fx-background-color: #FFF;">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </NumberTextField>
+            <NumberTextField fx:id="sec" alignment="CENTER" layoutX="702.0" layoutY="376.0" prefHeight="27.0" prefWidth="198.0" style="-fx-background-color: #FFF;">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </NumberTextField>
          </children></Pane>
       <Pane id="p5" fx:id="p5" layoutX="0.0" layoutY="0.0" prefHeight="733.0" prefWidth="1100.0" visible="false">
          <children>

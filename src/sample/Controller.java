@@ -3,6 +3,7 @@ package sample;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -19,6 +20,9 @@ public class Controller {
 
     private double xOffset = 0;
     private double yOffset = 0;
+
+    private int minn;
+    private int secc;
 
     private int grade_test = 2;
     private int class_test = 5;
@@ -53,6 +57,10 @@ public class Controller {
     protected Pane p4;
     @FXML
     protected Pane p5;
+    @FXML
+    protected TextField min;
+    @FXML
+    protected TextField sec;
 
     //
 
@@ -150,6 +158,12 @@ public class Controller {
 
     @FXML
     public void btnMin_Clicked(Event event) {stage.setIconified(true);}
+
+    @FXML
+    public void btnStart_Clicked(Event event) {
+        minn = 0;
+        secc = 0;
+    }
 
     @FXML
     public void menu1(Event event) {

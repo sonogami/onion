@@ -29,6 +29,8 @@ public class Controller {
 
     private Student[] students = new Student[] {new Student("김민준",3),new Student("김재원",3),new Student("양파맨",1)};
 
+    private ImageView[] onions = new ImageView[4];
+
     @FXML
     protected ImageView draggableImage;
     @FXML
@@ -62,8 +64,6 @@ public class Controller {
     @FXML
     protected TextField sec;
 
-    //
-
     public void setDragFunction(Stage stage) {
         this.stage = stage;
 
@@ -84,66 +84,28 @@ public class Controller {
     }
 
     public void setDragOnion(Stage stage){
-        onion1.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                xOffset = onion1.getLayoutX() + 60;
-                yOffset = onion1.getLayoutY() + 60;
-            }
-        });
-        onion1.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                onion1.setX(event.getSceneX() - xOffset);
-                onion1.setY(event.getSceneY() - yOffset);
-            }
-        });
+        onions[0] = onion1;
+        onions[1] = onion2;
+        onions[2] = onion3;
+        onions[3] = onion4;
 
-        onion2.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                xOffset = onion2.getLayoutX() + 60;
-                yOffset = onion2.getLayoutY() + 60;
-            }
-        });
-        onion2.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                onion2.setX(event.getSceneX() - xOffset);
-                onion2.setY(event.getSceneY() - yOffset);
-            }
-        });
-
-        onion3.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                xOffset = onion3.getLayoutX() + 60;
-                yOffset = onion3.getLayoutY() + 60;
-            }
-        });
-        onion3.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                onion3.setX(event.getSceneX() - xOffset);
-                onion3.setY(event.getSceneY() - yOffset);
-            }
-        });
-
-
-        onion4.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                xOffset = onion4.getLayoutX() + 60;
-                yOffset = onion4.getLayoutY() + 60;
-            }
-        });
-        onion4.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                onion4.setX(event.getSceneX() - xOffset);
-                onion4.setY(event.getSceneY() - yOffset);
-            }
-        });
+        for(int i=0; i<4; i++) {
+            ImageView o = onions[i];
+            onions[i].setOnMousePressed(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    xOffset = o.getLayoutX() + 60;
+                    yOffset = o.getLayoutY() + 60;
+                }
+            });
+            onions[i].setOnMouseDragged(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    o.setX(event.getSceneX() - xOffset);
+                    o.setY(event.getSceneY() - yOffset);
+                }
+            });
+        }
     }
 
     @FXML
@@ -156,6 +118,9 @@ public class Controller {
 
     @FXML
     public void btnStart_Clicked(Event event) {
+        String minText = min.getText();
+        String secText = sec.getText();
+        System.out.println(minText + "분 " + secText + "초");
         minn = 0;
         secc = 0;
     }

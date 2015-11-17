@@ -3,6 +3,7 @@ package sample;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -33,9 +34,12 @@ public class Controller {
     private int grade_test = 2;
     private int class_test = 5;
 
+    private StudentGroup[] groups = new StudentGroup[6];
     private Student[] students = new Student[] {new Student("김민준",3),new Student("김재원",3),new Student("양파맨",1)};
 
     private ImageView[] onions = new ImageView[4];
+    private ImageView[] boxes = new ImageView[6];
+    private Label[] labels = new Label[6];
 
     @FXML
     protected ImageView draggableImage;
@@ -71,6 +75,31 @@ public class Controller {
     protected TextField sec;
     @FXML
     protected ImageView setex;
+    @FXML
+    protected ImageView Box1;
+    @FXML
+    protected ImageView Box2;
+    @FXML
+    protected ImageView Box3;
+    @FXML
+    protected ImageView Box4;
+    @FXML
+    protected ImageView Box5;
+    @FXML
+    protected ImageView Box6;
+    @FXML
+    protected Label lblGroup1;
+    @FXML
+    protected Label lblGroup2;
+    @FXML
+    protected Label lblGroup3;
+    @FXML
+    protected Label lblGroup4;
+    @FXML
+    protected Label lblGroup5;
+    @FXML
+    protected Label lblGroup6;
+
 
     public void setDragFunction(Stage stage) {
         this.stage = stage;
@@ -89,13 +118,43 @@ public class Controller {
                 stage.setY(event.getScreenY() - yOffset);
             }
         });
+
+
     }
 
     public void setDragOnion(Stage stage){
+        groups[0] = new StudentGroup();
+        groups[0].setStudents(students);
+        groups[1] = new StudentGroup();
+        groups[1].setStudents(students);
+        groups[2] = new StudentGroup();
+        groups[2].setStudents(students);
+        groups[3] = new StudentGroup();
+        groups[3].setStudents(students);
+        groups[4] = new StudentGroup();
+        groups[4].setStudents(students);
+        groups[5] = new StudentGroup();
+        groups[5].setStudents(students);
+
+        // -- start
         onions[0] = onion1;
         onions[1] = onion2;
         onions[2] = onion3;
         onions[3] = onion4;
+
+        boxes[0] = Box1;
+        boxes[1] = Box2;
+        boxes[2] = Box3;
+        boxes[3] = Box4;
+        boxes[4] = Box5;
+        boxes[5] = Box6;
+
+        labels[0] = lblGroup1;
+        labels[1] = lblGroup2;
+        labels[2] = lblGroup3;
+        labels[3] = lblGroup4;
+        labels[4] = lblGroup5;
+        labels[5] = lblGroup6;
 
         for(int i=0; i<4; i++) {
             ImageView o = onions[i];
@@ -111,6 +170,48 @@ public class Controller {
                 public void handle(MouseEvent event) {
                     o.setX(event.getSceneX() - xOffset);
                     o.setY(event.getSceneY() - yOffset);
+                    int colBox = 7;
+                    int o_x = (int)(o.getX() + o.getLayoutX()) + 60;
+                    int o_y = (int)(o.getY() + o.getLayoutY()) + 60;
+                    int b_x, b_y, b_w, b_h;
+                    for(int i=0; i<6; i++) {
+                        b_x = (int)(boxes[i].getX() + boxes[i].getLayoutX());
+                        b_y = (int)(boxes[i].getY() + boxes[i].getLayoutY());
+                        b_h = (int)boxes[i].getFitHeight();
+                        b_w = (int)boxes[i].getFitWidth();
+                        if((o_x - 3 <= b_x + b_w && o_x + 3 >= b_x) && (o_y - 3 <= b_y + b_h && o_y + 3 >= b_y)) {
+                            colBox = i;
+                        }
+                        if(i == colBox)
+                            boxes[i].setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);");
+                        else
+                            boxes[i].setStyle("");
+                    }
+
+                }
+            });
+            o.setOnMouseReleased(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    int o_x = (int)(o.getX() + o.getLayoutX()) + 60;
+                    int o_y = (int)(o.getY() + o.getLayoutY()) + 60;
+                    int b_x, b_y, b_w, b_h;
+                    for(int i=0; i<6; i++) {
+                        b_x = (int)(boxes[i].getX() + boxes[i].getLayoutX());
+                        b_y = (int)(boxes[i].getY() + boxes[i].getLayoutY());
+                        b_h = (int)boxes[i].getFitHeight();
+                        b_w = (int)boxes[i].getFitWidth();
+                        if((o_x - 3 <= b_x + b_w && o_x + 3 >= b_x) && (o_y - 3 <= b_y + b_h && o_y + 3 >= b_y)) {
+                            groups[i].plusOnion(o);
+                            labels[i].setText(((groups[i].getOnion()>=0)?"+":"") + groups[i].getOnion() + "점");
+                            // Onion Drawing
+                            break;
+                        }
+                    }
+                    o.setX(0);
+                    o.setY(0);
+                    for(int i=0; i<6; i++)
+                        boxes[i].setStyle("");
                 }
             });
         }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.*?>
 <?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -7,10 +8,42 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
+<!--<?import sample.NumberTextField?>-->
+
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <Pane id="p1" fx:id="p1" prefHeight="733.0" prefWidth="1100.0">
          <children>
+            <Label id="lblGroup1" fx:id="lblGroup1" layoutX="724.0" layoutY="194.0" prefHeight="28.0" prefWidth="73.0" text="+0점" textFill="#434343">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label id="lblGroup2" fx:id="lblGroup2" layoutX="724.0" layoutY="275.0" prefHeight="28.0" prefWidth="73.0" text="+0점" textFill="#434343">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label id="lblGroup3" fx:id="lblGroup3" layoutX="724.0" layoutY="349.0" prefHeight="28.0" prefWidth="73.0" text="+0점" textFill="#434343">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label id="lblGroup4" fx:id="lblGroup4" layoutX="724.0" layoutY="430.0" prefHeight="28.0" prefWidth="73.0" text="+0점" textFill="#434343">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label id="lblGroup5" fx:id="lblGroup5" layoutX="724.0" layoutY="512.0" prefHeight="28.0" prefWidth="73.0" text="+0점" textFill="#434343">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label id="lblGroup6" fx:id="lblGroup6" layoutX="724.0" layoutY="591.0" prefHeight="28.0" prefWidth="73.0" text="+0점" textFill="#434343">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
             <ImageView fitHeight="16.0" fitWidth="28.0" layoutX="335.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/pane_main/labelClass.png" />
@@ -159,7 +192,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="onion1" fitHeight="121.0" fitWidth="121.0" layoutX="826.0" layoutY="208.0" onMouseClicked="#btnOnion" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="imgOnion1" fx:id="onion1" fitHeight="121.0" fitWidth="121.0" layoutX="826.0" layoutY="208.0" onMouseClicked="#btnOnion" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/pane_main/onion_1.png" />
                </image>
@@ -167,7 +200,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="onion2" fitHeight="121.0" fitWidth="121.0" layoutX="923.0" layoutY="302.0" onMouseClicked="#btnOnion" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="imgOnion2" fx:id="onion2" fitHeight="121.0" fitWidth="121.0" layoutX="923.0" layoutY="302.0" onMouseClicked="#btnOnion" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/pane_main/onion_2.png" />
                </image>
@@ -175,7 +208,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="onion3" fitHeight="121.0" fitWidth="121.0" layoutX="826.0" layoutY="395.0" onMouseClicked="#btnOnion" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="imgOnion3" fx:id="onion3" fitHeight="121.0" fitWidth="121.0" layoutX="826.0" layoutY="395.0" onMouseClicked="#btnOnion" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/pane_main/onion_3.png" />
                </image>
@@ -183,7 +216,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="onion4" fitHeight="121.0" fitWidth="121.0" layoutX="918.0" layoutY="496.0" onMouseClicked="#btnOnion" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="imgOnion4" fx:id="onion4" fitHeight="121.0" fitWidth="121.0" layoutX="918.0" layoutY="496.0" onMouseClicked="#btnOnion" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/pane_main/onion_-1.png" />
                </image>
@@ -191,6 +224,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
+            <ComboBox layoutX="381.0" layoutY="77.0" prefHeight="25.0" prefWidth="87.0" style="-fx-background-color: #333; -fx-background-radius: 0;" />
          </children></Pane>
       <Pane id="p2" fx:id="p2" layoutX="0.0" layoutY="0.0" prefHeight="733.0" prefWidth="1100.0" visible="false">
 
@@ -247,16 +281,18 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <TextField fx:id="min" alignment="CENTER" layoutX="421.0" layoutY="376.0" prefHeight="27.0" prefWidth="198.0" style="-fx-background-color: #FFF;">
+            <!--
+            <sample.NumberTextField fx:id="min" alignment="CENTER" layoutX="421.0" layoutY="376.0" prefHeight="27.0" prefWidth="198.0" style="-fx-background-color: #FFF;">
                <font>
                   <Font size="16.0" />
                </font>
-            </TextField>
-            <TextField fx:id="sec" alignment="CENTER" layoutX="702.0" layoutY="376.0" prefHeight="27.0" prefWidth="198.0" style="-fx-background-color: #FFF;">
+            </sample.NumberTextField>
+            <sample.NumberTextField fx:id="sec" alignment="CENTER" layoutX="702.0" layoutY="376.0" prefHeight="27.0" prefWidth="198.0" style="-fx-background-color: #FFF;">
                <font>
                   <Font size="16.0" />
                </font>
-            </TextField>
+            </sample.NumberTextField>
+            -->
          </children></Pane>
       <Pane id="p5" fx:id="p5" layoutX="0.0" layoutY="0.0" prefHeight="733.0" prefWidth="1100.0" visible="false">
          <children>

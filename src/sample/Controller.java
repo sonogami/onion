@@ -33,6 +33,7 @@ public class Controller {
 
     private int grade_test = 2;
     private int class_test = 5;
+    private int tmpOnion_cnt = 0;
 
     private StudentGroup[] groups = new StudentGroup[6];
     private Student[] students = new Student[] {new Student("김민준",3),new Student("김재원",3),new Student("양파맨",1)};
@@ -40,6 +41,7 @@ public class Controller {
     private ImageView[] onions = new ImageView[4];
     private ImageView[] boxes = new ImageView[6];
     private Label[] labels = new Label[6];
+    private ImageView[] tmpOnions = new ImageView[100];
 
     @FXML
     protected ImageView draggableImage;
@@ -204,7 +206,14 @@ public class Controller {
                         if((o_x - 3 <= b_x + b_w && o_x + 3 >= b_x) && (o_y - 3 <= b_y + b_h && o_y + 3 >= b_y)) {
                             groups[i].plusOnion(o);
                             labels[i].setText(((groups[i].getOnion()>=0)?"+":"") + groups[i].getOnion() + "점");
-                            // Onion Drawing
+                            tmpOnions[tmpOnion_cnt] = new ImageView();
+                            tmpOnions[tmpOnion_cnt].setImage(o.getImage());
+                            p1.getChildren().add(tmpOnions[tmpOnion_cnt]);
+                            tmpOnions[tmpOnion_cnt].setX(boxes[i].getLayoutX() + 10 + (groups[i].getOnion_cnt()-1) * 40);
+                            tmpOnions[tmpOnion_cnt].setY(boxes[i].getLayoutY() + 8);
+                            tmpOnions[tmpOnion_cnt].setFitWidth(30);
+                            tmpOnions[tmpOnion_cnt].setFitHeight(30);
+                            tmpOnion_cnt ++;
                             break;
                         }
                     }

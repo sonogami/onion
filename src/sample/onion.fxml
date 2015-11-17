@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.*?>
-<?import java.lang.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
@@ -295,7 +295,7 @@
                   <Image url="@../image/pane_setting/inputBox_setting.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="37.0" fitWidth="39.0" layoutX="904.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="setex" fitHeight="37.0" fitWidth="39.0" layoutX="904.0" layoutY="257.0" onMouseClicked="#btnSetExcel_Clicked" preserveRatio="true">
                <image>
                   <Image url="@../image/pane_setting/btnFileSearch.png" />
                </image>
@@ -303,7 +303,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="37.0" fitWidth="39.0" layoutX="904.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="37.0" fitWidth="39.0" layoutX="904.0" layoutY="327.0" onMouseClicked="#btnRandFile1_Clicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/pane_setting/btnFileSearch.png" />
                </image>
@@ -311,7 +311,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="37.0" fitWidth="39.0" layoutX="904.0" layoutY="397.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="37.0" fitWidth="39.0" layoutX="904.0" layoutY="397.0" onMouseClicked="#btnRandFile2_Clicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/pane_setting/btnFileSearch.png" />
                </image>

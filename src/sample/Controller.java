@@ -7,14 +7,20 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
+import javax.swing.*;
+import java.io.File;
 import java.io.FileOutputStream;
 
 public class Controller {
+
+    private File file;
+
     static HSSFRow row;     // 열
     private Stage stage;
 
@@ -63,6 +69,8 @@ public class Controller {
     protected TextField min;
     @FXML
     protected TextField sec;
+    @FXML
+    protected ImageView setex;
 
     public void setDragFunction(Stage stage) {
         this.stage = stage;
@@ -91,14 +99,14 @@ public class Controller {
 
         for(int i=0; i<4; i++) {
             ImageView o = onions[i];
-            onions[i].setOnMousePressed(new EventHandler<MouseEvent>() {
+            o.setOnMousePressed(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
                     xOffset = o.getLayoutX() + 60;
                     yOffset = o.getLayoutY() + 60;
                 }
             });
-            onions[i].setOnMouseDragged(new EventHandler<MouseEvent>() {
+            o.setOnMouseDragged(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
                     o.setX(event.getSceneX() - xOffset);
@@ -216,6 +224,58 @@ public class Controller {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    public void btnSetExcel_Clicked(Event event){
+        setex.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                FileChooser fileChooser = new FileChooser();
+
+                //Set extension filter
+                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("xls files (*.xls)", "*.xls");
+                fileChooser.getExtensionFilters().add(extFilter);
+
+                //Show open file dialog
+                file = fileChooser.showOpenDialog(stage);
+            }
+        });
+    }
+
+    @FXML
+    public void btnRandFile1_Clicked(Event event){
+        setex.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                FileChooser fileChooser = new FileChooser();
+
+                //Set extension filter
+                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("flash files (*.swf)", "*.swf");
+                fileChooser.getExtensionFilters().add(extFilter);
+
+                //Show open file dialog
+                file = fileChooser.showOpenDialog(stage);
+            }
+        });
+    }
+
+    @FXML
+    public void btnRandFile2_Clicked(Event event){
+        setex.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                FileChooser fileChooser = new FileChooser();
+
+                //Set extension filter
+                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("flash files (*.swf)", "*.swf");
+                fileChooser.getExtensionFilters().add(extFilter);
+
+                //Show open file dialog
+                file = fileChooser.showOpenDialog(stage);
+            }
+        });
+    }
+
 
     @FXML
     public void Settings_Clicked(Event event){

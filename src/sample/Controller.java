@@ -146,7 +146,6 @@ public class Controller {
         onions[1] = onion2;
         onions[2] = onion3;
         onions[3] = onion4;
-        onions[3] = onion4;
 
         boxes[0] = Box1;
         boxes[1] = Box2;

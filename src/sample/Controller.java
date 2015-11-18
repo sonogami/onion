@@ -119,7 +119,6 @@ public class Controller {
             adr_excel.setText(adr);
 
             file = new File(adr);
-            System.out.println(file.getAbsolutePath());
 
             FileInputStream fis = new FileInputStream(file.getAbsolutePath());
 

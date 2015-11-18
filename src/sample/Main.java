@@ -19,27 +19,33 @@ public class Main extends Application {
         try {
             excel = new File("settings.ini");
 
-            if(excel.exists()) {
-                 bytes = new byte[(int) excel.length()];
+            if (excel.exists()) {
+                bytes = new byte[(int) excel.length()];
 
                 try (BufferedInputStream is = new BufferedInputStream(new FileInputStream(excel))) {
                     is.read(bytes);
                 }
             }
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-        String address_excel = new String(bytes,0,bytes.length);
 
         primaryStage.initStyle(StageStyle.UNDECORATED);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("onion.fxml"));
         Parent root = loader.load();
 
-        ((Controller)loader.getController()).setDragFunction(primaryStage);
-        ((Controller)loader.getController()).setDragOnion(primaryStage);
-        ((Controller)loader.getController()).setExcelFileAddress(address_excel);
+        ((Controller) loader.getController()).setDragFunction(primaryStage);
+        ((Controller) loader.getController()).setDragOnion(primaryStage);
+        String settings = new String(bytes, 0, bytes.length);
+        String address_excel;
+
+        if (settings.contains("ExcelPath=")) {
+            address_excel = settings.substring(settings.indexOf("ExcelPath=") + 10);
+            System.out.println(address_excel);
+
+            ((Controller) loader.getController()).setExcelFileAddress(address_excel);
+        }
 
         Scene scene = new Scene(root, 1100, 733);
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());

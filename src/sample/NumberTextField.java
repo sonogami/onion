@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 public class NumberTextField extends TextField {
     @Override
     public void replaceText(int i, int i1, String string){
-        if(string.matches("[0-9]") || string.isEmpty()) {
+        if((string.matches("[0-9]") && string.length() < 10) || string.isEmpty()) {
             super.replaceText(i, i1, string);
         }
     }

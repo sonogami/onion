@@ -104,7 +104,8 @@ public class Controller {
     protected Label lblGroup5;
     @FXML
     protected Label lblGroup6;
-
+    @FXML
+    protected Label adr_excel;
 
     public void setDragFunction(Stage stage) {
         this.stage = stage;
@@ -322,7 +323,7 @@ public class Controller {
         HSSFWorkbook workbook;
         HSSFSheet sheet;
         try {
-            inFile = new FileInputStream(address_excel);
+            inFile = new FileInputStream(file);
             workbook = new HSSFWorkbook(inFile);
             sheet = workbook.getSheet(grade_test + "학년" + class_test + "반");
 
@@ -368,6 +369,8 @@ public class Controller {
 
                 //Show open file dialog
                 file = fileChooser.showOpenDialog(stage);
+
+                adr_excel.setText(file.getAbsolutePath());
             }
         });
     }

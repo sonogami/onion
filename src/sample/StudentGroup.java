@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
 
 public class StudentGroup {
     private Student[] students;
-    private int onion = 0;
+    private int onion;
     private int onion_cnt;
 
     public Student getStudent(int i) {

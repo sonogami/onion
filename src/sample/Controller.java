@@ -16,6 +16,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import javax.swing.*;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
 public class Controller {
@@ -24,6 +25,8 @@ public class Controller {
 
     static HSSFRow row;     // 열
     private Stage stage;
+
+    String address_excel;
 
     private double xOffset = 0;
     private double yOffset = 0;
@@ -36,7 +39,7 @@ public class Controller {
     private int tmpOnion_cnt = 0;
 
     private StudentGroup[] groups = new StudentGroup[6];
-    private Student[] students = new Student[] {new Student("김민준",3),new Student("김재원",3),new Student("양파맨",1)};
+    private Student[] students = new Student[45];
 
     private ImageView[] onions = new ImageView[4];
     private ImageView[] boxes = new ImageView[6];
@@ -213,6 +216,7 @@ public class Controller {
                             tmpOnions[tmpOnion_cnt].setY(boxes[i].getLayoutY() + 8);
                             tmpOnions[tmpOnion_cnt].setFitWidth(30);
                             tmpOnions[tmpOnion_cnt].setFitHeight(30);
+                            //p1.getChildren().removeAll(tmpOnions);
                             tmpOnion_cnt ++;
                             break;
                         }
@@ -233,6 +237,19 @@ public class Controller {
 
     @FXML
     public void btnMin_Clicked(Event event) {stage.setIconified(true);}
+
+    @FXML
+    public void btnSetGroup_Clicked(Event event){
+        HSSFWorkbook workbook = new HSSFWorkbook();
+
+        //Sheet명 설정
+        HSSFSheet sheet = workbook.getSheet(grade_test + "학년" + class_test + "반");
+
+        for(int i = 0; i < sheet.getPhysicalNumberOfRows(); i++){
+            row = sheet.getRow(i + 1);
+            students[i] = new Student(Integer.getInteger(row.getCell(0).getStringCellValue()), row.getCell(1).getStringCellValue());
+        }
+    }
 
     @FXML
     public void btnStart_Clicked(Event event) {
@@ -300,37 +317,39 @@ public class Controller {
 
     @FXML
     public void btnExcel_Clicked(Event event) {
-        HSSFWorkbook workbook = new HSSFWorkbook();
-
-        //Sheet명 설정
-        for(int i = 2; i < 4; i++) {
-            for(int j = 1; j < 7; j++)
-                workbook.createSheet(i + "학년" + j + "반");
-        }
-
-
-        HSSFSheet sheet = workbook.getSheet(grade_test + "학년" + class_test + "반");
-
-        //출력
-        row = sheet.createRow(0);
-        row.createCell(0).setCellValue("학생명");
-        row.createCell(1).setCellValue("양파갯수");
-
-        for(int i = 0;  i < students.length; i++) {
-            row = sheet.createRow(i+1);
-            row.createCell(0).setCellValue(students[i].getName());
-            row.createCell(1).setCellValue(students[i].getOnion());
-        }
-
-        // 출력 파일 위치및 파일명 설정
-        FileOutputStream outFile;
+        FileInputStream inFile;
+        HSSFWorkbook workbook;
+        HSSFSheet sheet;
         try {
-            outFile = new FileOutputStream("output.xls");
-            workbook.write(outFile);
-            outFile.close();
+            inFile = new FileInputStream(address_excel);
+            workbook = new HSSFWorkbook(inFile);
+            sheet = workbook.getSheet(grade_test + "학년" + class_test + "반");
 
-            System.out.println("출력 완료");
-        } catch (Exception e) {
+            //출력
+            row = sheet.createRow(0);
+            row.createCell(0).setCellValue("번호");
+            row.createCell(1).setCellValue("학생명");
+            row.createCell(0).setCellValue("양파갯수");
+
+            for(int i = 0;  i < students.length; i++) {
+                row = sheet.createRow(i+1);
+                row.createCell(0).setCellValue(1);
+                row.createCell(1).setCellValue(students[i].getName());
+                row.createCell(2).setCellValue(students[i].getNum());
+            }
+
+            // 출력 파일 위치및 파일명 설정
+            FileOutputStream outFile;
+            try {
+                outFile = new FileOutputStream("output.xls");
+                workbook.write(outFile);
+                outFile.close();
+
+                System.out.println("출력 완료");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e){
             e.printStackTrace();
         }
     }

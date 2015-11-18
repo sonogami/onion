@@ -13,6 +13,9 @@ import javafx.stage.Stage;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import javax.swing.*;
 import java.io.File;
@@ -23,10 +26,12 @@ public class Controller {
 
     private File file;
 
-    static HSSFRow row;     // 열
+    static XSSFRow row;     // 열
     private Stage stage;
 
-    String address_excel;
+    FileInputStream inFile;
+    XSSFWorkbook workbook;
+    XSSFSheet sheet;
 
     private double xOffset = 0;
     private double yOffset = 0;
@@ -46,6 +51,7 @@ public class Controller {
     private Label[] labels = new Label[6];
     private ImageView[] tmpOnions = new ImageView[100];
 
+    //region FXML_varioubles
     @FXML
     protected ImageView draggableImage;
     @FXML
@@ -106,6 +112,23 @@ public class Controller {
     protected Label lblGroup6;
     @FXML
     protected Label adr_excel;
+    //endregion
+
+    public void setExcelFileAddress(String adr){
+        try {
+            adr_excel.setText(adr);
+
+            file = new File(adr);
+            System.out.println(file.getAbsolutePath());
+
+            FileInputStream fis = new FileInputStream(file.getAbsolutePath());
+
+            workbook = new XSSFWorkbook(fis);
+            sheet = workbook.getSheet(grade_test + "-" + class_test);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 
     public void setDragFunction(Stage stage) {
         this.stage = stage;
@@ -242,11 +265,6 @@ public class Controller {
 
     @FXML
     public void btnSetGroup_Clicked(Event event){
-        HSSFWorkbook workbook = new HSSFWorkbook();
-
-        //Sheet명 설정
-        HSSFSheet sheet = workbook.getSheet(grade_test + "학년" + class_test + "반");
-
         for(int i = 0; i < sheet.getPhysicalNumberOfRows(); i++){
             row = sheet.getRow(i + 1);
             students[i] = new Student(Integer.getInteger(row.getCell(0).getStringCellValue()), row.getCell(1).getStringCellValue());
@@ -319,41 +337,17 @@ public class Controller {
 
     @FXML
     public void btnExcel_Clicked(Event event) {
-        FileInputStream inFile;
-        HSSFWorkbook workbook;
-        HSSFSheet sheet;
-        try {
-            inFile = new FileInputStream(file);
-            workbook = new HSSFWorkbook(inFile);
-            sheet = workbook.getSheet(grade_test + "학년" + class_test + "반");
-
-            //출력
-            row = sheet.createRow(0);
-            row.createCell(0).setCellValue("번호");
-            row.createCell(1).setCellValue("학생명");
-            row.createCell(0).setCellValue("양파갯수");
-
-            for(int i = 0;  i < students.length; i++) {
-                row = sheet.createRow(i+1);
-                row.createCell(0).setCellValue(1);
-                row.createCell(1).setCellValue(students[i].getName());
-                row.createCell(2).setCellValue(students[i].getNum());
-            }
-
-            // 출력 파일 위치및 파일명 설정
-            FileOutputStream outFile;
-            try {
-                outFile = new FileOutputStream("output.xls");
-                workbook.write(outFile);
-                outFile.close();
-
-                System.out.println("출력 완료");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+//        // 출력 파일 위치및 파일명 설정
+//        FileOutputStream outFile;
+//        try {
+//            outFile = new FileOutputStream("output.xls");
+//            workbook.write(outFile);
+//            outFile.close();
+//
+//            System.out.println("출력 완료");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     @FXML
@@ -371,7 +365,27 @@ public class Controller {
                 file = fileChooser.showOpenDialog(stage);
 
                 adr_excel.setText(file.getAbsolutePath());
-                System.out.println("lksdafhasdkjlfhaskldjfhadksj");
+
+                try {
+                    inFile = new FileInputStream(file);
+                    workbook = new XSSFWorkbook(inFile);
+                    sheet = workbook.getSheet(grade_test + "학년" + class_test + "반");
+
+                    //출력
+                    row = sheet.createRow(0);
+                    row.createCell(0).setCellValue("번호");
+                    row.createCell(1).setCellValue("학생명");
+                    row.createCell(0).setCellValue("양파갯수");
+
+                    for (int i = 0; i < students.length; i++) {
+                        row = sheet.createRow(i + 1);
+                        row.createCell(0).setCellValue(1);
+                        row.createCell(1).setCellValue(students[i].getName());
+                        row.createCell(2).setCellValue(students[i].getNum());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

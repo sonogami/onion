@@ -12,7 +12,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <Pane id="p1" fx:id="p1" prefHeight="733.0" prefWidth="1100.0" visible="false">
+      <Pane id="p1" fx:id="p1" prefHeight="733.0" prefWidth="1100.0">
          <children>
             <Label id="lblGroup1" fx:id="lblGroup1" layoutX="724.0" layoutY="194.0" prefHeight="28.0" prefWidth="73.0" text="+0점" textFill="#434343">
                <font>
@@ -297,7 +297,7 @@
             </sample.NumberTextField>
             -->
          </children></Pane>
-      <Pane id="p5" fx:id="p5" layoutX="0.0" layoutY="0.0" prefHeight="733.0" prefWidth="1100.0">
+      <Pane id="p5" fx:id="p5" layoutX="0.0" layoutY="0.0" prefHeight="733.0" prefWidth="1100.0" visible="false">
          <children>
             <ImageView fitHeight="33.0" fitWidth="60.0" layoutX="647.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
                <image>

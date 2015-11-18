@@ -146,6 +146,7 @@ public class Controller {
         onions[1] = onion2;
         onions[2] = onion3;
         onions[3] = onion4;
+        onions[3] = onion4;
 
         boxes[0] = Box1;
         boxes[1] = Box2;
@@ -236,7 +237,8 @@ public class Controller {
     }
 
     @FXML
-    public void btnMin_Clicked(Event event) {stage.setIconified(true);}
+    public void btnMin_Clicked(Event event) {
+        stage.setIconified(true);}
 
     @FXML
     public void btnSetGroup_Clicked(Event event){

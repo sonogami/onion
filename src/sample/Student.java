@@ -5,26 +5,30 @@ package sample;
  */
 public class Student {
     String name;
-    int onion;
+    int num;
 
-    public Student(String name, int onion) {
+    public Student(int num, String name) {
         this.name = name;
-        this.onion = onion;
+        this.num = num;
+    }
+
+    public Student(){
+        // empty
     }
 
     public String getName() {
         return name;
     }
 
-    public int getOnion() {
-        return onion;
+    public int getNum() {
+        return num;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setOnion(int onion) {
-        this.onion = onion;
+    public void setNum(int onion) {
+        this.num = num;
     }
 }

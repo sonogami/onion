@@ -12,7 +12,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <Pane id="p1" fx:id="p1" prefHeight="733.0" prefWidth="1100.0">
+      <Pane id="p1" fx:id="p1" prefHeight="733.0" prefWidth="1100.0" visible="false">
          <children>
             <Label id="lblGroup1" fx:id="lblGroup1" layoutX="724.0" layoutY="194.0" prefHeight="28.0" prefWidth="73.0" text="+0점" textFill="#434343">
                <font>
@@ -59,7 +59,7 @@
                   <Image url="@../image/pane_main/labelExcel.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="16.0" fitWidth="106.0" layoutX="492.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="16.0" fitWidth="106.0" layoutX="492.0" layoutY="126.0" onMouseClicked="#btnSetGroup_Clicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/pane_main/labelRandomGroup.png" />
                </image>
@@ -108,11 +108,6 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </ImageView>
-            <ImageView fitHeight="34.0" fitWidth="132.0" layoutX="619.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/pane_main/ComboBox.png" />
-               </image>
             </ImageView>
             <ImageView fitHeight="16.0" fitWidth="73.0" layoutX="524.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -224,12 +219,20 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ComboBox layoutX="381.0" layoutY="77.0" prefHeight="25.0" prefWidth="87.0" style="-fx-background-color: #333; -fx-background-radius: 0;" />
+            <ComboBox layoutX="381.0" layoutY="76.0" prefHeight="28.0" prefWidth="87.0" style="-fx-background-color: #333; -fx-background-radius: 0;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ComboBox>
+            <TextField layoutX="619.0" layoutY="77.0" prefHeight="27.0" prefWidth="133.0" />
          </children></Pane>
       <Pane id="p2" fx:id="p2" layoutX="0.0" layoutY="0.0" prefHeight="733.0" prefWidth="1100.0" visible="false">
 
       </Pane>
-      <Pane id="p3" fx:id="p3" layoutX="0.0" layoutY="0.0" prefHeight="733.0" prefWidth="1100.0" visible="false" />
+      <Pane id="p3" fx:id="p3" layoutX="0.0" layoutY="0.0" prefHeight="733.0" prefWidth="1100.0">
+         <children>
+            <ListView layoutX="454.0" layoutY="154.0" prefHeight="362.0" prefWidth="443.0" />
+         </children></Pane>
       <Pane id="p4" fx:id="p4" layoutX="0.0" layoutY="0.0" prefHeight="733.0" prefWidth="1100.0" visible="false">
          <children>
             <ImageView fitHeight="32.0" fitWidth="87.0" layoutX="634.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">

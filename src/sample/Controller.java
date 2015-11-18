@@ -371,6 +371,7 @@ public class Controller {
                 file = fileChooser.showOpenDialog(stage);
 
                 adr_excel.setText(file.getAbsolutePath());
+                System.out.printf("hihihi");
             }
         });
     }

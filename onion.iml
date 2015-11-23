@@ -8,5 +8,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="poi-3.13-20150929" level="project" />
+    <orderEntry type="library" name="xmlbeans-5.2.4" level="project" />
   </component>
 </module>

@@ -10,17 +10,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import javax.swing.*;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.InputStream;
 
 public class Controller {
 
@@ -29,7 +24,7 @@ public class Controller {
     static XSSFRow row;     // 열
     private Stage stage;
 
-    FileInputStream inFile;
+    InputStream inFile;
     XSSFWorkbook workbook;
     XSSFSheet sheet;
 
@@ -40,7 +35,7 @@ public class Controller {
     private int secc;
 
     private int grade_test = 2;
-    private int class_test = 5;
+    private int class_test = 1;
     private int tmpOnion_cnt = 0;
 
     private StudentGroup[] groups = new StudentGroup[6];
@@ -114,19 +109,19 @@ public class Controller {
     protected Label adr_excel;
     //endregion
 
-    public void setExcelFileAddress(String adr){
+    public void setExcelFileAddress(String adr){/*
         try {
             adr_excel.setText(adr);
 
             file = new File(adr);
 
-            FileInputStream fis = new FileInputStream(file.getAbsolutePath());
-
-            workbook = new XSSFWorkbook(fis);
+            try (FileInputStream fis = new FileInputStream(file)) {
+                workbook = new XSSFWorkbook(fis);
+            }
             sheet = workbook.getSheet(grade_test + "-" + class_test);
         } catch(Exception e){
             e.printStackTrace();
-        }
+        }*/
     }
 
     public void setDragFunction(Stage stage) {
@@ -350,43 +345,36 @@ public class Controller {
     }
 
     @FXML
-    public void btnSetExcel_Clicked(Event event){
-        setex.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                FileChooser fileChooser = new FileChooser();
+    public void btnSetExcel_Clicked(Event event) {
+        FileChooser fileChooser = new FileChooser();
 
-                //Set extension filter
-                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("xls files (*.xls)", "*.xls");
-                fileChooser.getExtensionFilters().add(extFilter);
+        //Set extension filter
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("xlsx files (*.xlsx)", "*.xlsx");
+        fileChooser.getExtensionFilters().add(extFilter);
 
-                //Show open file dialog
-                file = fileChooser.showOpenDialog(stage);
+        //Show open file dialog
+        file = fileChooser.showOpenDialog(stage);
+        adr_excel.setText(file.getAbsolutePath());
 
-                adr_excel.setText(file.getAbsolutePath());
+        try {
+            String s = file.getAbsolutePath();
 
-                try {
-                    inFile = new FileInputStream(file);
-                    workbook = new XSSFWorkbook(inFile);
-                    sheet = workbook.getSheet(grade_test + "학년" + class_test + "반");
+            inFile = new FileInputStream(s);
+            workbook = new XSSFWorkbook(inFile);
+            sheet = workbook.getSheet(grade_test + "-" + class_test);
 
-                    //출력
-                    row = sheet.createRow(0);
-                    row.createCell(0).setCellValue("번호");
-                    row.createCell(1).setCellValue("학생명");
-                    row.createCell(0).setCellValue("양파갯수");
-
-                    for (int i = 0; i < students.length; i++) {
-                        row = sheet.createRow(i + 1);
-                        row.createCell(0).setCellValue(1);
-                        row.createCell(1).setCellValue(students[i].getName());
-                        row.createCell(2).setCellValue(students[i].getNum());
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+            try {
+                for (int i = 0; i < sheet.getPhysicalNumberOfRows(); i++) {
+                    row = sheet.getRow(0);
+                    students[i] = new Student(Integer.parseInt((row.getCell(0)).getStringCellValue()), (row.getCell(1)).getStringCellValue());
+                    System.out.println(students[i]);
                 }
+            } catch (NullPointerException e){
+                System.out.println("No sheet");
             }
-        });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

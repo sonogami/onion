@@ -42,6 +42,7 @@ public class Main extends Application {
 
         if (settings.contains("ExcelPath=")) {
             address_excel = settings.substring(settings.indexOf("ExcelPath=") + 10);
+            address_excel = address_excel.trim();
             System.out.println(address_excel);
 
             ((Controller) loader.getController()).setExcelFileAddress(address_excel);

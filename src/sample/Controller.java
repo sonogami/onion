@@ -107,9 +107,29 @@ public class Controller {
     protected Label lblGroup6;
     @FXML
     protected Label adr_excel;
+    @FXML
+    protected Label adr_rand1;
+    @FXML
+    protected Label adr_rand2;
     //endregion
 
-    public void setExcelFileAddress(String adr){/*
+    public void setExcelFileAddress(String adr){
+        if(adr.isEmpty() == false)
+            adr_excel.setText(adr);
+    }
+
+    public void setRand1FileAddress(String adr){
+        if(adr.isEmpty() == false)
+            adr_rand1.setText(adr);
+    }
+
+    public void setRand2FileAddress(String adr){
+        if(adr.isEmpty() == false)
+            adr_rand2.setText(adr);
+
+    }
+
+    /*
         try {
             adr_excel.setText(adr);
 
@@ -122,7 +142,7 @@ public class Controller {
         } catch(Exception e){
             e.printStackTrace();
         }*/
-    }
+
 
     public void setDragFunction(Stage stage) {
         this.stage = stage;
@@ -389,6 +409,7 @@ public class Controller {
 
         //Show open file dialog
         file = fileChooser.showOpenDialog(stage);
+        adr_rand1.setText(file.getAbsolutePath());
     }
 
     @FXML
@@ -401,6 +422,7 @@ public class Controller {
 
         //Show open file dialog
         file = fileChooser.showOpenDialog(stage);
+        adr_rand2.setText(file.getAbsolutePath());
     }
 
 

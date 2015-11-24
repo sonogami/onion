@@ -371,6 +371,16 @@
                   <Font name="Apple SD Gothic Neo Bold" size="20.0" />
                </font>
             </Label>
+            <Label id="address_excel" fx:id="adr_rand1" layoutX="542.0" layoutY="333.0">
+               <font>
+                  <Font name="Apple SD Gothic Neo Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label id="address_excel" fx:id="adr_rand2" layoutX="542.0" layoutY="403.0">
+               <font>
+                  <Font name="Apple SD Gothic Neo Bold" size="20.0" />
+               </font>
+            </Label>
 
          </children>
       </Pane>

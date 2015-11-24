@@ -6,6 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+import org.json.simple.parser.JSONParser;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -37,16 +40,26 @@ public class Main extends Application {
 
         ((Controller) loader.getController()).setDragFunction(primaryStage);
         ((Controller) loader.getController()).setDragOnion(primaryStage);
-        String settings = new String(bytes, 0, bytes.length);
-        String address_excel;
 
-        if (settings.contains("ExcelPath=")) {
-            address_excel = settings.substring(settings.indexOf("ExcelPath=") + 10);
-            address_excel = address_excel.trim();
-            System.out.println(address_excel);
+        String setting = new String(bytes, 0, bytes.length);
 
-            ((Controller) loader.getController()).setExcelFileAddress(address_excel);
-        }
+        System.out.println(setting);
+
+        JSONParser parser = new JSONParser();
+        JSONObject settings = (JSONObject)parser.parse(setting);
+
+
+        String address_excel = settings.get("ExcelPath").toString();
+        String address_rand1 = settings.get("Rand1").toString();
+        String address_rand2 = settings.get("Rand2").toString();
+
+        System.out.println(address_excel);
+        System.out.println(address_rand1);
+        System.out.println(address_rand2);
+
+        ((Controller) loader.getController()).setExcelFileAddress(address_excel);
+        ((Controller) loader.getController()).setRand1FileAddress(address_rand1);
+        ((Controller) loader.getController()).setRand2FileAddress(address_rand2);
 
         Scene scene = new Scene(root, 1100, 733);
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());

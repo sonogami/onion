@@ -50,7 +50,6 @@ public class Main extends Application {
 
         Scene scene = new Scene(root, 1100, 733);
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-        primaryStage.setTitle("Onion");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

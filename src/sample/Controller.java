@@ -361,13 +361,15 @@ public class Controller {
 
             inFile = new FileInputStream(s);
             workbook = new XSSFWorkbook(inFile);
-            sheet = workbook.getSheet(grade_test + "-" + class_test);
 
+            sheet = workbook.getSheet(grade_test + "-" + class_test);
             try {
                 for (int i = 0; i < sheet.getPhysicalNumberOfRows(); i++) {
                     row = sheet.getRow(0);
-                    students[i] = new Student(Integer.parseInt((row.getCell(0)).getStringCellValue()), (row.getCell(1)).getStringCellValue());
-                    System.out.println(students[i]);
+
+                    System.out.println(sheet + " " + row);
+
+//                    students[i] = new Student(num, s);
                 }
             } catch (NullPointerException e){
                 System.out.println("No sheet");
@@ -379,36 +381,26 @@ public class Controller {
 
     @FXML
     public void btnRandFile1_Clicked(Event event){
-        setex.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                FileChooser fileChooser = new FileChooser();
+        FileChooser fileChooser = new FileChooser();
 
-                //Set extension filter
-                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("flash files (*.swf)", "*.swf");
-                fileChooser.getExtensionFilters().add(extFilter);
+        //Set extension filter
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("flash files (*.swf)", "*.swf");
+        fileChooser.getExtensionFilters().add(extFilter);
 
-                //Show open file dialog
-                file = fileChooser.showOpenDialog(stage);
-            }
-        });
+        //Show open file dialog
+        file = fileChooser.showOpenDialog(stage);
     }
 
     @FXML
-    public void btnRandFile2_Clicked(Event event){
-        setex.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                FileChooser fileChooser = new FileChooser();
+    public void btnRandFile2_Clicked(Event event) {
+        FileChooser fileChooser = new FileChooser();
 
-                //Set extension filter
-                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("flash files (*.swf)", "*.swf");
-                fileChooser.getExtensionFilters().add(extFilter);
+        //Set extension filter
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("flash files (*.swf)", "*.swf");
+        fileChooser.getExtensionFilters().add(extFilter);
 
-                //Show open file dialog
-                file = fileChooser.showOpenDialog(stage);
-            }
-        });
+        //Show open file dialog
+        file = fileChooser.showOpenDialog(stage);
     }
 
 

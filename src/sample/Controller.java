@@ -11,6 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.apache.poi.sl.usermodel.TextBox;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -194,6 +195,8 @@ public class Controller {
     protected Label g6_5;
     @FXML
     protected Label g6_6;
+    @FXML
+    protected TextField TodayClass;
 
     //endregion
 
@@ -497,17 +500,8 @@ public class Controller {
 
     @FXML
     public void btnExcel_Clicked(Event event) {
-        // 출력 파일 위치및 파일명 설정
-        FileOutputStream outFile;
-        try {
-            outFile = new FileOutputStream(grade_test + "-" + class_test + ".xlsx");
-            workbook.write(outFile);
-            outFile.close();
-
-            System.out.println("출력 완료");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String sheetname = TodayClass.getText();
+        System.out.println(sheetname);
     }
 
     @FXML

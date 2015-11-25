@@ -13,9 +13,10 @@ import javafx.stage.Stage;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import java.io.*;
 
 public class Controller {
 
@@ -401,28 +402,36 @@ public class Controller {
 
     @FXML
     public void btnRandFile1_Clicked(Event event){
-        FileChooser fileChooser = new FileChooser();
+        try {
+            FileChooser fileChooser = new FileChooser();
 
-        //Set extension filter
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("flash files (*.swf)", "*.swf");
-        fileChooser.getExtensionFilters().add(extFilter);
+            //Set extension filter
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("flash files (*.swf)", "*.swf");
+            fileChooser.getExtensionFilters().add(extFilter);
 
-        //Show open file dialog
-        file = fileChooser.showOpenDialog(stage);
-        adr_rand1.setText(file.getAbsolutePath());
+            //Show open file dialog
+            file = fileChooser.showOpenDialog(stage);
+            adr_rand1.setText(file.getAbsolutePath());
+        } catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
     public void btnRandFile2_Clicked(Event event) {
-        FileChooser fileChooser = new FileChooser();
+        try {
+            FileChooser fileChooser = new FileChooser();
 
-        //Set extension filter
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("flash files (*.swf)", "*.swf");
-        fileChooser.getExtensionFilters().add(extFilter);
+            //Set extension filter
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("flash files (*.swf)", "*.swf");
+            fileChooser.getExtensionFilters().add(extFilter);
 
-        //Show open file dialog
-        file = fileChooser.showOpenDialog(stage);
-        adr_rand2.setText(file.getAbsolutePath());
+            //Show open file dialog
+            file = fileChooser.showOpenDialog(stage);
+            adr_rand2.setText(file.getAbsolutePath());
+        } catch (Exception e){
+          e.printStackTrace();
+        }
     }
 
 
@@ -433,5 +442,40 @@ public class Controller {
         p3.setVisible(false);
         p4.setVisible(false);
         p5.setVisible(true);
+    }
+
+    @FXML
+    public void btnSaveS_Clicked(){
+        File excel;
+        byte[] bytes = new byte[100];
+        try {
+            excel = new File("settings.ini");
+
+            if (excel.exists()) {
+                bytes = new byte[(int) excel.length()];
+
+                try (BufferedInputStream is = new BufferedInputStream(new FileInputStream(excel))) {
+                    is.read(bytes);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String setting = new String(bytes, 0, bytes.length);
+
+        try {
+            JSONObject jobj = new JSONObject();
+            jobj.put("ExcelPath", adr_excel.getText());
+            jobj.put("Rand1", adr_rand1.getText());
+            jobj.put("Rand2", adr_rand2.getText());
+
+            FileWriter file = new FileWriter("settings.ini");
+            file.write(jobj.toJSONString());
+            file.flush();
+            file.close();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 }

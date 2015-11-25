@@ -51,6 +51,8 @@ public class Main extends Application {
         String address_rand1 = settings.get("Rand1").toString();
         String address_rand2 = settings.get("Rand2").toString();
 
+        System.out.println("afasdf");
+
         ((Controller) loader.getController()).setExcelFileAddress(address_excel);
         ((Controller) loader.getController()).setRand1FileAddress(address_rand1);
         ((Controller) loader.getController()).setRand2FileAddress(address_rand2);

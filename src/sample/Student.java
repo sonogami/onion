@@ -12,6 +12,11 @@ public class Student {
         this.num = num;
     }
 
+    public Student(String num, String name) {
+        this.name = name;
+        this.num = Integer.parseInt(num);
+    }
+
     public Student(){
         // empty
     }

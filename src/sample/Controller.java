@@ -375,28 +375,31 @@ public class Controller {
 
         //Show open file dialog
         file = fileChooser.showOpenDialog(stage);
-        adr_excel.setText(file.getAbsolutePath());
 
-        try {
-            String s = file.getAbsolutePath();
+        if(file != null) {
+            adr_excel.setText(file.getAbsolutePath());
 
-            inFile = new FileInputStream(s);
-            workbook = new XSSFWorkbook(inFile);
-
-            sheet = workbook.getSheet(grade_test + "-" + class_test);
             try {
-                for (int i = 0; i < sheet.getPhysicalNumberOfRows(); i++) {
-                    row = sheet.getRow(0);
+                String s = file.getAbsolutePath();
 
-                    System.out.println(sheet + " " + row);
+                inFile = new FileInputStream(s);
+                workbook = new XSSFWorkbook(inFile);
+
+                sheet = workbook.getSheet(grade_test + "-" + class_test);
+                try {
+                    for (int i = 0; i < sheet.getPhysicalNumberOfRows(); i++) {
+                        row = sheet.getRow(0);
+
+                        System.out.println(sheet + " " + row);
 
 //                    students[i] = new Student(num, s);
+                    }
+                } catch (NullPointerException e) {
+                    System.out.println("No sheet");
                 }
-            } catch (NullPointerException e){
-                System.out.println("No sheet");
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -411,7 +414,8 @@ public class Controller {
 
             //Show open file dialog
             file = fileChooser.showOpenDialog(stage);
-            adr_rand1.setText(file.getAbsolutePath());
+            if(file != null)
+                adr_rand1.setText(file.getAbsolutePath());
         } catch(Exception e){
             e.printStackTrace();
         }
@@ -428,7 +432,8 @@ public class Controller {
 
             //Show open file dialog
             file = fileChooser.showOpenDialog(stage);
-            adr_rand2.setText(file.getAbsolutePath());
+            if(file != null)
+                adr_rand2.setText(file.getAbsolutePath());
         } catch (Exception e){
           e.printStackTrace();
         }

@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.poi.ss.usermodel.Cell;
@@ -199,35 +200,33 @@ public class Controller {
     public void setExcelFileAddress(String adr){
         file = new File(adr);
 
-        if(file != null) {
-            adr_excel.setText(file.getAbsolutePath());
+        adr_excel.setText(file.getAbsolutePath());
 
+        try {
+            String s = file.getAbsolutePath() + "/" + grade_test + "-" + class_test + ".xlsx";
+
+            inFile = new FileInputStream(s);
+            workbook = new XSSFWorkbook(inFile);
+
+            String sheetname = grade_test + "-" + class_test;
+            sheet = workbook.getSheet(sheetname);
+
+            System.out.println(sheetname);
+            System.out.println(workbook);
+            System.out.println(sheet);
             try {
-                String s = file.getAbsolutePath();
-
-                inFile = new FileInputStream(s);
-                workbook = new XSSFWorkbook(inFile);
-
-                String sheetname = grade_test + "-" + class_test;
-                sheet = workbook.getSheet(sheetname);
-
-                System.out.println(sheetname);
-                System.out.println(workbook);
-                System.out.println(sheet);
-                try {
-                    for (int i = 1; i <= sheet.getPhysicalNumberOfRows(); i++) {
-                        row = sheet.getRow(i);
-                        Cell cell = row.getCell(0);
-                        cell.setCellType(Cell.CELL_TYPE_STRING);
-                        int num = Integer.parseInt(cell.getStringCellValue());
-                        students[i] = new Student(num, row.getCell(1).getStringCellValue());
-                    }
-                } catch (NullPointerException e) {
-                    System.out.println("No sheet");
+                for (int i = 1; i <= sheet.getPhysicalNumberOfRows(); i++) {
+                    row = sheet.getRow(i);
+                    Cell cell = row.getCell(0);
+                    cell.setCellType(Cell.CELL_TYPE_STRING);
+                    int num = Integer.parseInt(cell.getStringCellValue());
+                    students[i] = new Student(num, row.getCell(1).getStringCellValue());
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (NullPointerException e) {
+                System.out.println("No sheet");
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -384,50 +383,52 @@ public class Controller {
             }
             groups[i].setStudents(tempstd);
         }
+        try {
+            g1_1.setText(groups[0].getStudent(0).getName());
+            g1_2.setText(groups[0].getStudent(1).getName());
+            g1_3.setText(groups[0].getStudent(2).getName());
+            g1_4.setText(groups[0].getStudent(3).getName());
+            g1_5.setText(groups[0].getStudent(4).getName());
+            g1_6.setText(groups[0].getStudent(5).getName());
 
-        g1_1.setText(groups[0].getStudent(0).getName());
-        g1_2.setText(groups[0].getStudent(1).getName());
-        g1_3.setText(groups[0].getStudent(2).getName());
-        g1_4.setText(groups[0].getStudent(3).getName());
-        g1_5.setText(groups[0].getStudent(4).getName());
-        g1_6.setText(groups[0].getStudent(5).getName());
+            g2_1.setText(groups[1].getStudent(0).getName());
+            g2_2.setText(groups[1].getStudent(1).getName());
+            g2_3.setText(groups[1].getStudent(2).getName());
+            g2_4.setText(groups[1].getStudent(3).getName());
+            g2_5.setText(groups[1].getStudent(4).getName());
+            g2_6.setText(groups[1].getStudent(5).getName());
 
-        g2_1.setText(groups[1].getStudent(0).getName());
-        g2_2.setText(groups[1].getStudent(1).getName());
-        g2_3.setText(groups[1].getStudent(2).getName());
-        g2_4.setText(groups[1].getStudent(3).getName());
-        g2_5.setText(groups[1].getStudent(4).getName());
-        g2_6.setText(groups[1].getStudent(5).getName());
+            g3_1.setText(groups[2].getStudent(0).getName());
+            g3_2.setText(groups[2].getStudent(1).getName());
+            g3_3.setText(groups[2].getStudent(2).getName());
+            g3_4.setText(groups[2].getStudent(3).getName());
+            g3_5.setText(groups[2].getStudent(4).getName());
+            g3_6.setText(groups[2].getStudent(5).getName());
 
-        g3_1.setText(groups[2].getStudent(0).getName());
-        g3_2.setText(groups[2].getStudent(1).getName());
-        g3_3.setText(groups[2].getStudent(2).getName());
-        g3_4.setText(groups[2].getStudent(3).getName());
-        g3_5.setText(groups[2].getStudent(4).getName());
-        g3_6.setText(groups[2].getStudent(5).getName());
+            g4_1.setText(groups[3].getStudent(0).getName());
+            g4_2.setText(groups[3].getStudent(1).getName());
+            g4_3.setText(groups[3].getStudent(2).getName());
+            g4_4.setText(groups[3].getStudent(3).getName());
+            g4_5.setText(groups[3].getStudent(4).getName());
+            g4_6.setText(groups[3].getStudent(5).getName());
 
-        g4_1.setText(groups[3].getStudent(0).getName());
-        g4_2.setText(groups[3].getStudent(1).getName());
-        g4_3.setText(groups[3].getStudent(2).getName());
-        g4_4.setText(groups[3].getStudent(3).getName());
-        g4_5.setText(groups[3].getStudent(4).getName());
-        g4_6.setText(groups[3].getStudent(5).getName());
+            g5_1.setText(groups[4].getStudent(0).getName());
+            g5_2.setText(groups[4].getStudent(1).getName());
+            g5_3.setText(groups[4].getStudent(2).getName());
+            g5_4.setText(groups[4].getStudent(3).getName());
+            g5_5.setText(groups[4].getStudent(4).getName());
+            g5_6.setText(groups[4].getStudent(5).getName());
 
-        g5_1.setText(groups[4].getStudent(0).getName());
-        g5_2.setText(groups[4].getStudent(1).getName());
-        g5_3.setText(groups[4].getStudent(2).getName());
-        g5_4.setText(groups[4].getStudent(3).getName());
-        g5_5.setText(groups[4].getStudent(4).getName());
-        g5_6.setText(groups[4].getStudent(5).getName());
+            g6_1.setText(groups[5].getStudent(0).getName());
+            g6_2.setText(groups[5].getStudent(1).getName());
+            g6_3.setText(groups[5].getStudent(2).getName());
+            g6_4.setText(groups[5].getStudent(3).getName());
+            g6_5.setText(groups[5].getStudent(4).getName());
+            g6_6.setText(groups[5].getStudent(5).getName());
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
 
-        g6_1.setText(groups[5].getStudent(0).getName());
-        g6_2.setText(groups[5].getStudent(1).getName());
-        g6_3.setText(groups[5].getStudent(2).getName());
-        g6_4.setText(groups[5].getStudent(3).getName());
-        g6_5.setText(groups[5].getStudent(4).getName());
-        g6_6.setText(groups[5].getStudent(5).getName());
-
-        System.out.println("fxck!");
     }
 
     @FXML
@@ -496,58 +497,25 @@ public class Controller {
 
     @FXML
     public void btnExcel_Clicked(Event event) {
-//        // 출력 파일 위치및 파일명 설정
-//        FileOutputStream outFile;
-//        try {
-//            outFile = new FileOutputStream("output.xls");
-//            workbook.write(outFile);
-//            outFile.close();
-//
-//            System.out.println("출력 완료");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        // 출력 파일 위치및 파일명 설정
+        FileOutputStream outFile;
+        try {
+            outFile = new FileOutputStream(grade_test + "-" + class_test + ".xlsx");
+            workbook.write(outFile);
+            outFile.close();
+
+            System.out.println("출력 완료");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     public void btnSetExcel_Clicked(Event event) {
-        FileChooser fileChooser = new FileChooser();
+        DirectoryChooser direcChooser = new DirectoryChooser();
 
-        //Set extension filter
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("xlsx files (*.xlsx)", "*.xlsx");
-        fileChooser.getExtensionFilters().add(extFilter);
-
-        //Show open file dialog
-        file = fileChooser.showOpenDialog(stage);
-
-        if(file != null) {
-            adr_excel.setText(file.getAbsolutePath());
-
-            try {
-                String s = file.getAbsolutePath();
-
-                inFile = new FileInputStream(s);
-                workbook = new XSSFWorkbook(inFile);
-
-//                sheet = workbook.getSheet(grade_test + "-" + class_test);
-                sheet = workbook.getSheetAt(0);
-                System.out.println(sheet.getSheetName());
-                try {
-                    for (int i = 1; i <= sheet.getPhysicalNumberOfRows(); i++) {
-                        row = sheet.getRow(i);
-                        Cell cell = row.getCell(0);
-                        cell.setCellType(Cell.CELL_TYPE_STRING);
-                        int num = Integer.parseInt(cell.getStringCellValue());
-                        students[i] = new Student(num, row.getCell(1).getStringCellValue());
-                        System.out.println(students[i].getNum() + " : " +  students[i].getName());
-                    }
-                } catch (NullPointerException e) {
-                    System.out.println("No sheet");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        file = direcChooser.showDialog(stage);
+        if(file != null) adr_excel.setText(file.getAbsolutePath());
     }
 
     @FXML

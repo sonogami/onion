@@ -43,8 +43,6 @@ public class Main extends Application {
 
         String setting = new String(bytes, 0, bytes.length);
 
-        System.out.println(setting);
-
         JSONParser parser = new JSONParser();
         JSONObject settings = (JSONObject)parser.parse(setting);
 
@@ -52,10 +50,6 @@ public class Main extends Application {
         String address_excel = settings.get("ExcelPath").toString();
         String address_rand1 = settings.get("Rand1").toString();
         String address_rand2 = settings.get("Rand2").toString();
-
-        System.out.println(address_excel);
-        System.out.println(address_rand1);
-        System.out.println(address_rand2);
 
         ((Controller) loader.getController()).setExcelFileAddress(address_excel);
         ((Controller) loader.getController()).setRand1FileAddress(address_rand1);

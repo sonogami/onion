@@ -21,13 +21,15 @@ import java.io.*;
 public class Controller {
 
     private File file;
+    private File rand1file;
+    private File rand2file;
 
-    static XSSFRow row;     // 열
     private Stage stage;
 
     InputStream inFile;
     XSSFWorkbook workbook;
     XSSFSheet sheet;
+    XSSFRow row;
 
     private double xOffset = 0;
     private double yOffset = 0;
@@ -117,6 +119,36 @@ public class Controller {
     public void setExcelFileAddress(String adr){
         if(adr.isEmpty() == false)
             adr_excel.setText(adr);
+        file = new File(adr);
+
+        if(file != null) {
+            adr_excel.setText(file.getAbsolutePath());
+
+            try {
+                String s = file.getAbsolutePath();
+
+                inFile = new FileInputStream(s);
+                workbook = new XSSFWorkbook(inFile);
+
+                String sheetname = grade_test + "-" + class_test;
+                sheet = workbook.getSheet(sheetname);
+
+                System.out.println(sheetname);
+                System.out.println(workbook);
+                System.out.println(sheet);
+                try {
+                    for (int i = 1; i <= sheet.getPhysicalNumberOfRows(); i++) {
+                        row = sheet.getRow(0);
+                        System.out.println(row);
+//                    students[i] = new Student(num, s);
+                    }
+                } catch (NullPointerException e) {
+                    System.out.println("No sheet");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void setRand1FileAddress(String adr){
@@ -282,7 +314,8 @@ public class Controller {
     public void btnSetGroup_Clicked(Event event){
         for(int i = 0; i < sheet.getPhysicalNumberOfRows(); i++){
             row = sheet.getRow(i + 1);
-            students[i] = new Student(Integer.getInteger(row.getCell(0).getStringCellValue()), row.getCell(1).getStringCellValue());
+            System.out.println(row);
+//            students[i] = new Student(Integer.getInteger(row.getCell(0).getStringCellValue()), row.getCell(1).getStringCellValue());
         }
     }
 
@@ -385,9 +418,11 @@ public class Controller {
                 inFile = new FileInputStream(s);
                 workbook = new XSSFWorkbook(inFile);
 
-                sheet = workbook.getSheet(grade_test + "-" + class_test);
+//                sheet = workbook.getSheet(grade_test + "-" + class_test);
+                sheet = workbook.getSheetAt(0);
+                System.out.println(sheet.getSheetName());
                 try {
-                    for (int i = 0; i < sheet.getPhysicalNumberOfRows(); i++) {
+                    for (int i = 1; i <= sheet.getPhysicalNumberOfRows(); i++) {
                         row = sheet.getRow(0);
 
                         System.out.println(sheet + " " + row);

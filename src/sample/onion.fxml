@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.*?>
-<?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.*?>
@@ -12,7 +10,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <Pane id="p1" fx:id="p1" prefHeight="733.0" prefWidth="1100.0" visible="false">
+      <Pane id="p1" fx:id="p1" prefHeight="733.0" prefWidth="1100.0">
          <children>
             <Label id="lblGroup1" fx:id="lblGroup1" layoutX="724.0" layoutY="194.0" prefHeight="28.0" prefWidth="73.0" text="+0점" textFill="#434343">
                <font>
@@ -225,6 +223,42 @@
                </cursor>
             </ComboBox>
             <TextField layoutX="619.0" layoutY="77.0" prefHeight="27.0" prefWidth="133.0" />
+            <Label fx:id="g1_1" layoutX="361.0" layoutY="242.0" text="김민준" />
+            <Label fx:id="g1_2" layoutX="411.0" layoutY="242.0" text="김민준" />
+            <Label fx:id="g1_3" layoutX="461.0" layoutY="242.0" text="김민준" />
+            <Label fx:id="g1_4" layoutX="511.0" layoutY="242.0" text="김민준" />
+            <Label fx:id="g1_5" layoutX="561.0" layoutY="242.0" text="김민준" />
+            <Label fx:id="g1_6" layoutX="611.0" layoutY="242.0" text="김민준" />
+            <Label fx:id="g2_1" layoutX="361.0" layoutY="321.0" text="김민준" />
+            <Label fx:id="g2_2" layoutX="411.0" layoutY="321.0" text="김민준" />
+            <Label fx:id="g2_3" layoutX="461.0" layoutY="321.0" text="김민준" />
+            <Label fx:id="g2_4" layoutX="511.0" layoutY="321.0" text="김민준" />
+            <Label fx:id="g2_5" layoutX="561.0" layoutY="321.0" text="김민준" />
+            <Label fx:id="g2_6" layoutX="611.0" layoutY="321.0" text="김민준" />
+            <Label fx:id="g3_1" layoutX="361.0" layoutY="397.0" text="김민준" />
+            <Label fx:id="g3_2" layoutX="411.0" layoutY="397.0" text="김민준" />
+            <Label fx:id="g3_3" layoutX="461.0" layoutY="397.0" text="김민준" />
+            <Label fx:id="g3_4" layoutX="511.0" layoutY="397.0" text="김민준" />
+            <Label fx:id="g3_5" layoutX="561.0" layoutY="397.0" text="김민준" />
+            <Label fx:id="g3_6" layoutX="611.0" layoutY="397.0" text="김민준" />
+            <Label fx:id="g4_1" layoutX="361.0" layoutY="477.0" text="김민준" />
+            <Label fx:id="g4_2" layoutX="411.0" layoutY="477.0" text="김민준" />
+            <Label fx:id="g4_3" layoutX="461.0" layoutY="477.0" text="김민준" />
+            <Label fx:id="g4_4" layoutX="511.0" layoutY="477.0" text="김민준" />
+            <Label fx:id="g4_5" layoutX="561.0" layoutY="477.0" text="김민준" />
+            <Label fx:id="g4_6" layoutX="611.0" layoutY="477.0" text="김민준" />
+            <Label fx:id="g5_1" layoutX="361.0" layoutY="555.0" text="김민준" />
+            <Label fx:id="g5_2" layoutX="411.0" layoutY="555.0" text="김민준" />
+            <Label fx:id="g5_3" layoutX="461.0" layoutY="555.0" text="김민준" />
+            <Label fx:id="g5_4" layoutX="511.0" layoutY="555.0" text="김민준" />
+            <Label fx:id="g5_5" layoutX="561.0" layoutY="555.0" text="김민준" />
+            <Label fx:id="g5_6" layoutX="611.0" layoutY="555.0" text="김민준" />
+            <Label fx:id="g6_1" layoutX="361.0" layoutY="635.0" text="김민준" />
+            <Label fx:id="g6_2" layoutX="411.0" layoutY="635.0" text="김민준" />
+            <Label fx:id="g6_3" layoutX="461.0" layoutY="635.0" text="김민준" />
+            <Label fx:id="g6_4" layoutX="511.0" layoutY="635.0" text="김민준" />
+            <Label fx:id="g6_5" layoutX="561.0" layoutY="635.0" text="김민준" />
+            <Label fx:id="g6_6" layoutX="611.0" layoutY="635.0" text="김민준" />
          </children></Pane>
       <Pane id="p2" fx:id="p2" layoutX="0.0" layoutY="0.0" prefHeight="733.0" prefWidth="1100.0" visible="false">
 
@@ -297,7 +331,7 @@
             </sample.NumberTextField>
             -->
          </children></Pane>
-      <Pane id="p5" fx:id="p5" layoutX="0.0" layoutY="0.0" prefHeight="733.0" prefWidth="1100.0">
+      <Pane id="p5" fx:id="p5" layoutX="0.0" layoutY="0.0" prefHeight="733.0" prefWidth="1100.0" visible="false">
          <children>
             <ImageView fitHeight="33.0" fitWidth="60.0" layoutX="647.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
                <image>

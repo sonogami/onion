@@ -114,10 +114,83 @@ public class Controller {
     protected Label adr_rand1;
     @FXML
     protected Label adr_rand2;
+    @FXML
+    protected Label g1_1;
+    @FXML
+    protected Label g1_2;
+    @FXML
+    protected Label g1_3;
+    @FXML
+    protected Label g1_4;
+    @FXML
+    protected Label g1_5;
+    @FXML
+    protected Label g1_6;
+    @FXML
+    protected Label g2_1;
+    @FXML
+    protected Label g2_2;
+    @FXML
+    protected Label g2_3;
+    @FXML
+    protected Label g2_4;
+    @FXML
+    protected Label g2_5;
+    @FXML
+    protected Label g2_6;
+    @FXML
+    protected Label g3_1;
+    @FXML
+    protected Label g3_2;
+    @FXML
+    protected Label g3_3;
+    @FXML
+    protected Label g3_4;
+    @FXML
+    protected Label g3_5;
+    @FXML
+    protected Label g3_6;
+    @FXML
+    protected Label g4_1;
+    @FXML
+    protected Label g4_2;
+    @FXML
+    protected Label g4_3;
+    @FXML
+    protected Label g4_4;
+    @FXML
+    protected Label g4_5;
+    @FXML
+    protected Label g4_6;
+    @FXML
+    protected Label g5_1;
+    @FXML
+    protected Label g5_2;
+    @FXML
+    protected Label g5_3;
+    @FXML
+    protected Label g5_4;
+    @FXML
+    protected Label g5_5;
+    @FXML
+    protected Label g5_6;
+    @FXML
+    protected Label g6_1;
+    @FXML
+    protected Label g6_2;
+    @FXML
+    protected Label g6_3;
+    @FXML
+    protected Label g6_4;
+    @FXML
+    protected Label g6_5;
+    @FXML
+    protected Label g6_6;
+
     //endregion
 
     public void setExcelFileAddress(String adr){
-        if(adr.isEmpty() == false)
+        if(!adr.isEmpty())
             adr_excel.setText(adr);
         file = new File(adr);
 
@@ -152,30 +225,15 @@ public class Controller {
     }
 
     public void setRand1FileAddress(String adr){
-        if(adr.isEmpty() == false)
+        if(!adr.isEmpty())
             adr_rand1.setText(adr);
     }
 
     public void setRand2FileAddress(String adr){
-        if(adr.isEmpty() == false)
+        if(!adr.isEmpty())
             adr_rand2.setText(adr);
 
     }
-
-    /*
-        try {
-            adr_excel.setText(adr);
-
-            file = new File(adr);
-
-            try (FileInputStream fis = new FileInputStream(file)) {
-                workbook = new XSSFWorkbook(fis);
-            }
-            sheet = workbook.getSheet(grade_test + "-" + class_test);
-        } catch(Exception e){
-            e.printStackTrace();
-        }*/
-
 
     public void setDragFunction(Stage stage) {
         this.stage = stage;

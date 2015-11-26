@@ -228,7 +228,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ComboBox>
-            <TextField fx:id="TodayClass" layoutX="620.0" layoutY="76.0" prefHeight="29.0" prefWidth="106.0" style="-fx-border-color: #333; -fx-background-color: #333; -fx-font-style: white;" />
+            <TextField fx:id="TodayClass" layoutX="620.0" layoutY="76.0" prefHeight="29.0" prefWidth="106.0" style="-fx-border-color: #333; -fx-background-color: #333; -fx-text-fill: white;" />
             <Label fx:id="g1_1" layoutX="361.0" layoutY="242.0" />
             <Label fx:id="g1_2" layoutX="411.0" layoutY="242.0" />
             <Label fx:id="g1_3" layoutX="461.0" layoutY="242.0" />

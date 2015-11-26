@@ -443,6 +443,7 @@ public class Controller {
         secc = 0;
     }
 
+    //region Menu
     @FXML
     public void menu1(Event event) {
         p1.setVisible(true);
@@ -478,7 +479,7 @@ public class Controller {
         p4.setVisible(true);
         p5.setVisible(false);
     }
-
+    //endregion
 
     @FXML
     public void btnOnion(Event event){

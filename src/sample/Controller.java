@@ -209,33 +209,6 @@ public class Controller {
         file = new File(adr);
 
         adr_excel.setText(file.getAbsolutePath());
-
-        try {
-            String s = file.getAbsolutePath() + "/" + grade_test + "-" + class_test + ".xlsx";
-
-            inFile = new FileInputStream(s);
-            workbook = new XSSFWorkbook(inFile);
-
-            String sheetname = grade_test + "-" + class_test;
-            sheet = workbook.getSheet(sheetname);
-
-            System.out.println(sheetname);
-            System.out.println(workbook);
-            System.out.println(sheet);
-            try {
-                for (int i = 1; i <= sheet.getPhysicalNumberOfRows(); i++) {
-                    row = sheet.getRow(i);
-                    Cell cell = row.getCell(0);
-                    cell.setCellType(Cell.CELL_TYPE_STRING);
-                    int num = Integer.parseInt(cell.getStringCellValue());
-                    students[i] = new Student(num, row.getCell(1).getStringCellValue());
-                }
-            } catch (NullPointerException e) {
-                System.out.println("No sheet");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public void setRand1FileAddress(String adr){
@@ -603,5 +576,12 @@ public class Controller {
     public void SetTodayClass(){
         todayClass = TodayClass.getText();
         comboTClass.getItems().add(todayClass);
+    }
+
+    @FXML
+    public void GetClass(){
+        for(int i = 0; i < file.list().length; i++){
+            System.out.println("xxx");
+        }
     }
 }

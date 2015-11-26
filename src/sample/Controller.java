@@ -3,6 +3,7 @@ package sample;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -29,6 +30,8 @@ public class Controller {
     private File rand2file;
 
     private Stage stage;
+
+    private String todayClass;
 
     InputStream inFile;
     XSSFWorkbook workbook;
@@ -197,6 +200,8 @@ public class Controller {
     protected Label g6_6;
     @FXML
     protected TextField TodayClass;
+    @FXML
+    protected ComboBox comboTClass;
 
     //endregion
 
@@ -592,5 +597,11 @@ public class Controller {
         } catch(Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    public void SetTodayClass(){
+        todayClass = TodayClass.getText();
+        comboTClass.getItems().add(todayClass);
     }
 }

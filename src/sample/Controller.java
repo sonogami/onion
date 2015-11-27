@@ -1,11 +1,15 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -30,8 +34,6 @@ public class Controller {
     private File rand2file;
 
     private Stage stage;
-
-    private String todayClass;
 
     InputStream inFile;
     XSSFWorkbook workbook;
@@ -62,70 +64,38 @@ public class Controller {
     Student[] tempstd = new Student[6];
 
     //region FXML_varioubles
-    @FXML
-    protected ImageView draggableImage;
-    @FXML
-    protected ImageView onion1;
-    @FXML
-    protected ImageView onion2;
-    @FXML
-    protected ImageView onion3;
-    @FXML
-    protected ImageView onion4;
-    @FXML
-    protected ImageView menu1;
-    @FXML
-    protected ImageView menu2;
-    @FXML
-    protected ImageView menu3;
-    @FXML
-    protected ImageView menu4;
-    @FXML
-    protected Pane p1;
-    @FXML
-    protected Pane p2;
-    @FXML
-    protected Pane p3;
-    @FXML
-    protected Pane p4;
-    @FXML
-    protected Pane p5;
-    @FXML
-    protected TextField min;
-    @FXML
-    protected TextField sec;
-    @FXML
-    protected ImageView setex;
-    @FXML
-    protected ImageView Box1;
-    @FXML
-    protected ImageView Box2;
-    @FXML
-    protected ImageView Box3;
-    @FXML
-    protected ImageView Box4;
-    @FXML
-    protected ImageView Box5;
-    @FXML
-    protected ImageView Box6;
-    @FXML
-    protected Label lblGroup1;
-    @FXML
-    protected Label lblGroup2;
-    @FXML
-    protected Label lblGroup3;
-    @FXML
-    protected Label lblGroup4;
-    @FXML
-    protected Label lblGroup5;
-    @FXML
-    protected Label lblGroup6;
-    @FXML
-    protected Label adr_excel;
-    @FXML
-    protected Label adr_rand1;
-    @FXML
-    protected Label adr_rand2;
+    @FXML protected ImageView draggableImage;
+    @FXML protected ImageView onion1;
+    @FXML protected ImageView onion2;
+    @FXML protected ImageView onion3;
+    @FXML protected ImageView onion4;
+    @FXML protected ImageView menu1;
+    @FXML protected ImageView menu2;
+    @FXML protected ImageView menu3;
+    @FXML protected ImageView menu4;
+    @FXML protected Pane p1;
+    @FXML protected Pane p2;
+    @FXML protected Pane p3;
+    @FXML protected Pane p4;
+    @FXML protected Pane p5;
+    @FXML protected TextField min;
+    @FXML protected TextField sec;
+    @FXML protected ImageView setex;
+    @FXML protected ImageView Box1;
+    @FXML protected ImageView Box2;
+    @FXML protected ImageView Box3;
+    @FXML protected ImageView Box4;
+    @FXML protected ImageView Box5;
+    @FXML protected ImageView Box6;
+    @FXML protected Label lblGroup1;
+    @FXML protected Label lblGroup2;
+    @FXML protected Label lblGroup3;
+    @FXML protected Label lblGroup4;
+    @FXML protected Label lblGroup5;
+    @FXML protected Label lblGroup6;
+    @FXML protected Label adr_excel;
+    @FXML protected Label adr_rand1;
+    @FXML protected Label adr_rand2;
     @FXML
     protected Label g1_1;
     @FXML
@@ -201,14 +171,40 @@ public class Controller {
     @FXML
     protected TextField TodayClass;
     @FXML
-    protected ComboBox comboTClass;
-
+    protected TableView tbvStudents;
     //endregion
 
     public void setExcelFileAddress(String adr){
         file = new File(adr);
 
         adr_excel.setText(file.getAbsolutePath());
+
+        try {
+            String s = file.getAbsolutePath() + "/" + grade_test + "-" + class_test + ".xlsx";
+
+            inFile = new FileInputStream(s);
+            workbook = new XSSFWorkbook(inFile);
+
+            String sheetname = grade_test + "-" + class_test;
+            sheet = workbook.getSheet(sheetname);
+
+            System.out.println(sheetname);
+            System.out.println(workbook);
+            System.out.println(sheet);
+            try {
+                for (int i = 1; i <= sheet.getPhysicalNumberOfRows(); i++) {
+                    row = sheet.getRow(i);
+                    Cell cell = row.getCell(0);
+                    cell.setCellType(Cell.CELL_TYPE_STRING);
+                    int num = Integer.parseInt(cell.getStringCellValue());
+                    students[i] = new Student(num, row.getCell(1).getStringCellValue(), 0);
+                }
+            } catch (NullPointerException e) {
+                System.out.println("No sheet");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void setRand1FileAddress(String adr){
@@ -244,6 +240,7 @@ public class Controller {
     }
 
     public void setDragOnion(Stage stage){
+        //region VARS
         groups[0] = new StudentGroup();
         groups[0].setStudents(students);
         groups[1] = new StudentGroup();
@@ -276,6 +273,19 @@ public class Controller {
         labels[3] = lblGroup4;
         labels[4] = lblGroup5;
         labels[5] = lblGroup6;
+        //endregion
+
+        final ObservableList<Student> data =
+                FXCollections.observableArrayList(
+                        new Student(1, "김재원", 1),
+                        new Student(2, "김재투", 2),
+                        new Student(3, "김재3", 0)
+                );
+
+        ((TableColumn)tbvStudents.getColumns().get(0)).setCellValueFactory(new PropertyValueFactory<Student, Integer>("num"));
+        ((TableColumn)tbvStudents.getColumns().get(1)).setCellValueFactory(new PropertyValueFactory<Student, String>("name"));
+        ((TableColumn)tbvStudents.getColumns().get(2)).setCellValueFactory(new PropertyValueFactory<Student, Integer>("onion"));
+        tbvStudents.setItems(data);
 
         for(int i=0; i<4; i++) {
             ImageView o = onions[i];
@@ -569,19 +579,6 @@ public class Controller {
             file.close();
         } catch(Exception e) {
             e.printStackTrace();
-        }
-    }
-
-    @FXML
-    public void SetTodayClass(){
-        todayClass = TodayClass.getText();
-        comboTClass.getItems().add(todayClass);
-    }
-
-    @FXML
-    public void GetClass(){
-        for(int i = 0; i < file.list().length; i++){
-            System.out.println("xxx");
         }
     }
 }

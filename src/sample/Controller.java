@@ -557,4 +557,9 @@ public class Controller {
     public void SelectTodayClass(){
         TodayClass.setText(TodayClassList.getSelectionModel().getSelectedItem().toString());
     }
+
+    @FXML
+    public void SelectClass(){
+        Class.setPromptText(Class.getSelectionModel().getSelectedItem().toString());
+    }
 }

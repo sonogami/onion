@@ -5,10 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -96,84 +93,49 @@ public class Controller {
     @FXML protected Label adr_excel;
     @FXML protected Label adr_rand1;
     @FXML protected Label adr_rand2;
-    @FXML
-    protected Label g1_1;
-    @FXML
-    protected Label g1_2;
-    @FXML
-    protected Label g1_3;
-    @FXML
-    protected Label g1_4;
-    @FXML
-    protected Label g1_5;
-    @FXML
-    protected Label g1_6;
-    @FXML
-    protected Label g2_1;
-    @FXML
-    protected Label g2_2;
-    @FXML
-    protected Label g2_3;
-    @FXML
-    protected Label g2_4;
-    @FXML
-    protected Label g2_5;
-    @FXML
-    protected Label g2_6;
-    @FXML
-    protected Label g3_1;
-    @FXML
-    protected Label g3_2;
-    @FXML
-    protected Label g3_3;
-    @FXML
-    protected Label g3_4;
-    @FXML
-    protected Label g3_5;
-    @FXML
-    protected Label g3_6;
-    @FXML
-    protected Label g4_1;
-    @FXML
-    protected Label g4_2;
-    @FXML
-    protected Label g4_3;
-    @FXML
-    protected Label g4_4;
-    @FXML
-    protected Label g4_5;
-    @FXML
-    protected Label g4_6;
-    @FXML
-    protected Label g5_1;
-    @FXML
-    protected Label g5_2;
-    @FXML
-    protected Label g5_3;
-    @FXML
-    protected Label g5_4;
-    @FXML
-    protected Label g5_5;
-    @FXML
-    protected Label g5_6;
-    @FXML
-    protected Label g6_1;
-    @FXML
-    protected Label g6_2;
-    @FXML
-    protected Label g6_3;
-    @FXML
-    protected Label g6_4;
-    @FXML
-    protected Label g6_5;
-    @FXML
-    protected Label g6_6;
-    @FXML
-    protected TextField TodayClass;
-    @FXML
-    protected TableView tbvStudents;
+    @FXML protected Label g1_1;
+    @FXML protected Label g1_2;
+    @FXML protected Label g1_3;
+    @FXML protected Label g1_4;
+    @FXML protected Label g1_5;
+    @FXML protected Label g1_6;
+    @FXML protected Label g2_1;
+    @FXML protected Label g2_2;
+    @FXML protected Label g2_3;
+    @FXML protected Label g2_4;
+    @FXML protected Label g2_5;
+    @FXML protected Label g2_6;
+    @FXML protected Label g3_1;
+    @FXML protected Label g3_2;
+    @FXML protected Label g3_3;
+    @FXML protected Label g3_4;
+    @FXML protected Label g3_5;
+    @FXML protected Label g3_6;
+    @FXML protected Label g4_1;
+    @FXML protected Label g4_2;
+    @FXML protected Label g4_3;
+    @FXML protected Label g4_4;
+    @FXML protected Label g4_5;
+    @FXML protected Label g4_6;
+    @FXML protected Label g5_1;
+    @FXML protected Label g5_2;
+    @FXML protected Label g5_3;
+    @FXML protected Label g5_4;
+    @FXML protected Label g5_5;
+    @FXML protected Label g5_6;
+    @FXML protected Label g6_1;
+    @FXML protected Label g6_2;
+    @FXML protected Label g6_3;
+    @FXML protected Label g6_4;
+    @FXML protected Label g6_5;
+    @FXML protected Label g6_6;
+    @FXML protected TextField TodayClass;
+    @FXML protected ComboBox TodayClassList;
+    @FXML protected ComboBox Class;
+    @FXML protected TableView tbvStudents;
     //endregion
 
+    // 세이브를 제외한 엑셀 관련 기능은 이 함수 안으로 - ㄱㅁㅈ
     public void setExcelFileAddress(String adr){
         file = new File(adr);
 
@@ -579,5 +541,15 @@ public class Controller {
         } catch(Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    public void SetTodayClass(){
+        TodayClassList.getItems().add(TodayClass.getText());
+    }
+
+    @FXML
+    public void SelectTodayClass(){
+        TodayClass.setText(TodayClassList.getSelectionModel().getSelectedItem().toString());
     }
 }

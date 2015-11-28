@@ -178,6 +178,11 @@ public class Controller {
         ((TableColumn)tbvStudents.getColumns().get(1)).setCellValueFactory(new PropertyValueFactory<Student, String>("name"));
         ((TableColumn)tbvStudents.getColumns().get(2)).setCellValueFactory(new PropertyValueFactory<Student, Integer>("onion"));
         tbvStudents.setItems(data);
+
+        String[] directories = file.list();
+
+        for(String s : directories)
+            Class.getItems().add(s.substring(0, s.length()-5));
     }
 
     public void setRand1FileAddress(String adr){

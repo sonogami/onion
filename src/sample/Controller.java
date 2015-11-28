@@ -205,6 +205,17 @@ public class Controller {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        ObservableList<Student> data = FXCollections.observableArrayList();
+
+        for(int i = 1; i <= sheet.getPhysicalNumberOfRows(); i++){
+            data.add(students[i]);
+        }
+
+        ((TableColumn)tbvStudents.getColumns().get(0)).setCellValueFactory(new PropertyValueFactory<Student, Integer>("num"));
+        ((TableColumn)tbvStudents.getColumns().get(1)).setCellValueFactory(new PropertyValueFactory<Student, String>("name"));
+        ((TableColumn)tbvStudents.getColumns().get(2)).setCellValueFactory(new PropertyValueFactory<Student, Integer>("onion"));
+        tbvStudents.setItems(data);
     }
 
     public void setRand1FileAddress(String adr){
@@ -274,18 +285,6 @@ public class Controller {
         labels[4] = lblGroup5;
         labels[5] = lblGroup6;
         //endregion
-
-        final ObservableList<Student> data =
-                FXCollections.observableArrayList(
-                        new Student(1, "김재원", 1),
-                        new Student(2, "김재투", 2),
-                        new Student(3, "김재3", 0)
-                );
-
-        ((TableColumn)tbvStudents.getColumns().get(0)).setCellValueFactory(new PropertyValueFactory<Student, Integer>("num"));
-        ((TableColumn)tbvStudents.getColumns().get(1)).setCellValueFactory(new PropertyValueFactory<Student, String>("name"));
-        ((TableColumn)tbvStudents.getColumns().get(2)).setCellValueFactory(new PropertyValueFactory<Student, Integer>("onion"));
-        tbvStudents.setItems(data);
 
         for(int i=0; i<4; i++) {
             ImageView o = onions[i];

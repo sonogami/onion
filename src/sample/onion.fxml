@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -271,7 +272,7 @@
       </Pane>
       <Pane id="p3" fx:id="p3" layoutX="0.0" layoutY="0.0" prefHeight="733.0" prefWidth="1100.0">
          <children>
-            <TableView id="tbvStudents" fx:id="tbvStudents" focusTraversable="false" layoutX="493.0" layoutY="89.0" prefHeight="545.0" prefWidth="229.0" style="-fx-border-color: #333; -fx-background-insets: -1.4, 0, 1; -fx-background-radius: 1.4, 0, 0; -fx-background-repeat: no-repeat;">
+            <TableView id="tbvStudents" fx:id="tbvStudents" focusTraversable="false" layoutX="493.0" layoutY="89.0" prefHeight="545.0" prefWidth="229.0" style="-fx-border-color: #333; -fx-background-insets: -1.4, 0, 1; -fx-background-radius: 1.4, 0, 0; -fx-text-fill: white;">
               <columns>
                 <TableColumn prefWidth="37.0" text="#" />
                 <TableColumn prefWidth="89.0" text="이름" />

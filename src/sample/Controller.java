@@ -181,8 +181,8 @@ public class Controller {
 
         String[] directories = file.list();
 
-        for(String s : directories)
-            Class.getItems().add(s.substring(0, s.length()-5));
+        for(int i = 1; i < directories.length - 1; i++)
+            Class.getItems().add(directories[i].substring(0, directories[i].length()-5));
     }
 
     public void setRand1FileAddress(String adr){

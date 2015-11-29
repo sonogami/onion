@@ -518,7 +518,14 @@ public class Controller {
                         XSSFRow sumrow = sumsheet.getRow(stu.getNum());
                         XSSFCell cell = sumrow.getCell(2);
                         cell.setCellType(Cell.CELL_TYPE_STRING);
-                        int num = Integer.parseInt(cell.getStringCellValue().substring(0,cell.getStringCellValue().length() - 2));
+                        System.out.println(cell.getStringCellValue());
+
+                        int num;
+                        if(cell.getStringCellValue().contains(".0"))
+                            num = Integer.parseInt(cell.getStringCellValue().substring(0,cell.getStringCellValue().length() - 2));
+                        else
+                            num = Integer.parseInt(cell.getStringCellValue());
+
 
                         cell.setCellValue(num + groups[i].getOnion());
                     }

@@ -12,7 +12,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <Pane id="p1" fx:id="p1" prefHeight="733.0" prefWidth="1100.0">
+      <Pane id="p1" fx:id="p1" prefHeight="733.0" prefWidth="1100.0" visible="false">
          <children>
             <ComboBox fx:id="TodayClassList" layoutX="620.0" layoutY="76.0" onAction="#SelectTodayClass" prefHeight="29.0" prefWidth="133.0" style="-fx-background-color: #333; -fx-background-radius: 0;">
                <cursor>
@@ -277,9 +277,14 @@
                </columns>
             </TableView>
          </children></Pane>
-      <Pane id="p4" fx:id="p4" layoutX="0.0" layoutY="0.0" prefHeight="733.0" prefWidth="1100.0" visible="false">
+      <Pane id="p4" fx:id="p4" layoutX="0.0" layoutY="0.0" prefHeight="733.0" prefWidth="1100.0">
          <children>
-            <ImageView fitHeight="32.0" fitWidth="87.0" layoutX="634.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+            <Label fx:id="lblTimer2" alignment="CENTER" layoutX="415.0" layoutY="196.0" prefHeight="139.0" prefWidth="507.0" text="00:00:00">
+               <font>
+                  <Font name="System Bold" size="80.0" />
+               </font>
+            </Label>
+             <ImageView fitHeight="32.0" fitWidth="87.0" layoutX="634.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/pane_timer/label_timer.png" />
                </image>
@@ -312,7 +317,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="39.0" fitWidth="253.0" layoutX="687.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="39.0" fitWidth="253.0" layoutX="687.0" layoutY="460.0" onMouseClicked="#btnStop_Clicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/pane_timer/btnStop.png" />
                </image>
@@ -328,7 +333,6 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <!--
             <sample.NumberTextField fx:id="min" alignment="CENTER" layoutX="421.0" layoutY="376.0" prefHeight="27.0" prefWidth="198.0" style="-fx-background-color: #FFF;">
                <font>
                   <Font size="16.0" />
@@ -339,7 +343,6 @@
                   <Font size="16.0" />
                </font>
             </sample.NumberTextField>
-            -->
          </children></Pane>
       <Pane id="p5" fx:id="p5" layoutX="0.0" layoutY="0.0" prefHeight="733.0" prefWidth="1100.0" visible="false">
          <children>

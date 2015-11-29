@@ -2,6 +2,8 @@ package sample;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -379,16 +381,6 @@ public class Controller {
         }
     }
 
-    @FXML
-    public void btnStart_Clicked(Event event) {
-        String minText = min.getText();
-        String secText = sec.getText();
-        System.out.println(minText + "분 " + secText + "초");
-        minn = 0;
-        secc = 0;
-        System.out.println("rr");
-    }
-
     //region Menu
     @FXML
     public void menu1(Event event) {
@@ -763,5 +755,53 @@ public class Controller {
         }
 
         rotated = !rotated;
+    }
+    @FXML
+    private Label lblTimer2;
+    private int hour2=0, min2=0, sec2=0;
+
+    private Task<Void> task2;
+
+    @FXML
+    public void btnStart_Clicked() {
+        min2 = Integer.parseInt(min.getText());
+        sec2 = Integer.parseInt(sec.getText());
+
+        task2 = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                while(true) {
+
+                    if(isCancelled()) {
+                        break;
+                    }
+
+                    sec2--;
+                    if(sec2 < 0) { min2--; sec2=59; }
+                    if(min2 < 0) { hour2--; min2=59; }
+
+                    String timerText = String.format("%02d:%02d:%02d", hour2, min2, sec2);
+                    updateMessage(timerText);
+
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        if(isCancelled()) {
+                            break;
+                        }
+                    }
+                }
+                return null;
+            }
+        };
+
+        lblTimer2.textProperty().bind(task2.messageProperty());
+
+        Thread thread = new Thread(task2);
+        thread.start();
+    }
+    @FXML
+    public void btnStop_Clicked() {
+        task2.cancel();
     }
 }

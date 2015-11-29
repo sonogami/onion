@@ -17,6 +17,8 @@ import java.io.FileInputStream;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        // read settings.ini
         File excel;
         byte[] bytes = new byte[100];
         try {
@@ -43,18 +45,20 @@ public class Main extends Application {
 
         String setting = new String(bytes, 0, bytes.length);
 
+        // 파싱
         JSONParser parser = new JSONParser();
         JSONObject settings = (JSONObject)parser.parse(setting);
-
 
         String address_excel = settings.get("ExcelPath").toString();
         String address_rand1 = settings.get("Rand1").toString();
         String address_rand2 = settings.get("Rand2").toString();
 
+        // 로드
         ((Controller) loader.getController()).setExcelFileAddress(address_excel);
         ((Controller) loader.getController()).setRand1FileAddress(address_rand1);
         ((Controller) loader.getController()).setRand2FileAddress(address_rand2);
 
+        // root 실행
         Scene scene = new Scene(root, 1100, 733);
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         primaryStage.setScene(scene);

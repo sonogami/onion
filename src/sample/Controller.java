@@ -34,8 +34,6 @@ import java.util.Random;
 public class Controller {
 
     private File file;
-    private File rand1file;
-    private File rand2file;
 
     private Stage stage;
 
@@ -60,6 +58,9 @@ public class Controller {
 
     private int minn;
     private int secc;
+    private int hour;
+
+    private String s;
 
     private int v = 0;
 
@@ -75,8 +76,6 @@ public class Controller {
     private Label[] labels = new Label[6];
     private ImageView[] tmpOnions = new ImageView[100];
     private Label[] grLabels = new Label[6];
-
-    private int hour=0, minn=0, secc=0;
 
     private Task<Void> task;
 
@@ -95,6 +94,7 @@ public class Controller {
     @FXML protected Pane p3;
     @FXML protected Pane p4;
     @FXML protected Pane p5;
+    @FXML protected Pane p6;
     @FXML protected TextField min;
     @FXML protected TextField sec;
     @FXML protected ImageView setex;
@@ -121,6 +121,12 @@ public class Controller {
     @FXML protected TableView tbvStudents;
     @FXML protected TableView tbvStudents2;
     @FXML protected ImageView btn_jojang;
+    @FXML protected Label fl1;
+    @FXML protected Label fl2;
+    @FXML protected Label fl3;
+    @FXML protected Label fl4;
+    @FXML protected Label fl5;
+    @FXML protected Label fl6;
     //endregion
 
     // settings.ini에서 엑셀 파일들을 읽어와서 디렉터리 내부의 엑셀 파일들 출력
@@ -306,109 +312,110 @@ public class Controller {
     // 그룹 지정 버튼
     @FXML
     public void btnSetGroup_Clicked(Event event){
+        if(!TodayClass.getText().isEmpty()) {
+            ArrayList<Integer> list = new ArrayList<Integer>(NumberOfStudents);
+            ArrayList<Integer> list2 = new ArrayList<Integer>(6);
 
-        ArrayList<Integer> list = new ArrayList<Integer>(NumberOfStudents);
-        ArrayList<Integer> list2 = new ArrayList<Integer>(6);
+            Random rand = new Random();
 
-        Random rand = new Random();
-
-        for(int i = 1; i <= NumberOfStudents; i++) {
-            list.add(i);
-        }
-
-        for(int i = 1; i <= 6; i++) {
-            list2.add(i);
-        }
-
-        // 조장 고정 기능이 켜져 있으면
-        if(ParalyzeLeader)
-            for(int i = 5; i > -1; i--){
-                list.remove(jojang[i] - 1);
+            for (int i = 1; i <= NumberOfStudents; i++) {
+                list.add(i);
             }
 
-        ArrayList<Student> listStudent = new ArrayList<Student>(7);
-
-        while(list.size() > 0) {
-            // 숫자 랜덤으로 가져옴
-            int index = rand.nextInt(list.size());
-
-            index = list.remove(index);
-
-            if((jj < 5 && kk < 5) || (jj < 6 && kk == 5)) {
-                listStudent.add(students[index - 1]);
-                jj++;
+            for (int i = 1; i <= 6; i++) {
+                list2.add(i);
             }
-            index++;
 
-            if(jj == 5 && kk < 5) {
-                // 조장 고정 기능이 켜져 있으면
-                if(ParalyzeLeader){
-                    int ind3x = rand.nextInt(list2.size());
-                    ind3x = list2.remove(ind3x);
-                    ind3x = jojang[ind3x - 1];
+            // 조장 고정 기능이 켜져 있으면
+            if (ParalyzeLeader)
+                for (int i = 5; i > -1; i--) {
+                    list.remove(jojang[i] - 1);
+                }
 
-                    listStudent.add(students[ind3x - 1]);
-                } else {
-                    index = rand.nextInt(list.size());
+            ArrayList<Student> listStudent = new ArrayList<Student>(7);
 
-                    index = list.remove(index);
+            while (list.size() > 0) {
+                // 숫자 랜덤으로 가져옴
+                int index = rand.nextInt(list.size());
 
+                index = list.remove(index);
 
+                if ((jj < 5 && kk < 5) || (jj < 6 && kk == 5)) {
                     listStudent.add(students[index - 1]);
+                    jj++;
                 }
+                index++;
 
-                groups[kk].setStudents(listStudent.toArray(new Student[listStudent.size()]));
-                listStudent.clear();
-                kk++;
-                jj = 0;
-            }
-            if(jj == 6 && kk == 5) {
-                // 조장 고정 기능이 켜져 있으면
-                if(ParalyzeLeader){
-                    int ind3x = rand.nextInt(list2.size());
-                    ind3x = list2.remove(ind3x);
-                    ind3x = jojang[ind3x - 1];
+                if (jj == 5 && kk < 5) {
+                    // 조장 고정 기능이 켜져 있으면
+                    if (ParalyzeLeader) {
+                        int ind3x = rand.nextInt(list2.size());
+                        ind3x = list2.remove(ind3x);
+                        ind3x = jojang[ind3x - 1];
 
-                    listStudent.add(students[ind3x - 1]);
-                } else {
-                    index = rand.nextInt(list.size());
+                        listStudent.add(students[ind3x - 1]);
+                    } else {
+                        index = rand.nextInt(list.size());
 
-                    index = list.remove(index);
+                        index = list.remove(index);
 
-                    listStudent.add(students[index - 1]);
+
+                        listStudent.add(students[index - 1]);
+                    }
+
+                    groups[kk].setStudents(listStudent.toArray(new Student[listStudent.size()]));
+                    listStudent.clear();
+                    kk++;
+                    jj = 0;
                 }
+                if (jj == 6 && kk == 5) {
+                    // 조장 고정 기능이 켜져 있으면
+                    if (ParalyzeLeader) {
+                        int ind3x = rand.nextInt(list2.size());
+                        ind3x = list2.remove(ind3x);
+                        ind3x = jojang[ind3x - 1];
 
-                groups[kk].setStudents(listStudent.toArray(new Student[listStudent.size()]));
-                listStudent.clear();
-                jj = 0;
-                kk = 0;
-            }
-        }
+                        listStudent.add(students[ind3x - 1]);
+                    } else {
+                        index = rand.nextInt(list.size());
 
-        // 메인화면에 학생명 출력
-        try {
-            p1.getChildren().removeAll(grLabels);
-            StringBuffer sb;
-            for (int i = 0; i < 6; i++)
-                grLabels[i] = new Label();
-            p1.getChildren().addAll(grLabels);
-            for (int i = 0; i < 6; i++) {
-                sb = new StringBuffer();
-                for (int j = 5; j >= 0; j--) {
-                    if(i < 5)
-                        sb.append(groups[i].getStudent(j).getName() + "   ");
-                    else
-                        sb.append(groups[i].getStudent(j+1).getName() + "   ");
+                        index = list.remove(index);
+
+                        listStudent.add(students[index - 1]);
+                    }
+
+                    groups[kk].setStudents(listStudent.toArray(new Student[listStudent.size()]));
+                    listStudent.clear();
+                    jj = 0;
+                    kk = 0;
                 }
-                grLabels[i].setText(sb.toString());
-                grLabels[i].setLayoutX(361);
-                grLabels[i].setLayoutY(242 + 80*i);
             }
-            grLabels[5].setText(grLabels[5].getText() + groups[5].getStudent(0).getName());
 
-            isClassEnd = true;
-        } catch(Exception e) {
-            e.printStackTrace();
+            // 메인화면에 학생명 출력
+            try {
+                p1.getChildren().removeAll(grLabels);
+                StringBuffer sb;
+                for (int i = 0; i < 6; i++)
+                    grLabels[i] = new Label();
+                p1.getChildren().addAll(grLabels);
+                for (int i = 0; i < 6; i++) {
+                    sb = new StringBuffer();
+                    for (int j = 5; j >= 0; j--) {
+                        if (i < 5)
+                            sb.append(groups[i].getStudent(j).getName() + "   ");
+                        else
+                            sb.append(groups[i].getStudent(j + 1).getName() + "   ");
+                    }
+                    grLabels[i].setText(sb.toString());
+                    grLabels[i].setLayoutX(361);
+                    grLabels[i].setLayoutY(242 + 80 * i);
+                }
+                grLabels[5].setText(grLabels[5].getText() + groups[5].getStudent(0).getName());
+
+                isClassEnd = true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -478,7 +485,7 @@ public class Controller {
     public void btnExcel_Clicked(Event event) {
         String sheetname = TodayClass.getText();
         if(!sheetname.isEmpty() && isClassEnd) try {
-            String s = file.getAbsolutePath() + "/" + Class.getSelectionModel().getSelectedItem().toString() + ".xlsx";
+            s = file.getAbsolutePath() + "/" + Class.getSelectionModel().getSelectedItem().toString() + ".xlsx";
 
             inFile = new FileInputStream(s);
             workbook = new XSSFWorkbook(inFile);
@@ -869,5 +876,25 @@ public class Controller {
     @FXML
     public void btnStop_Clicked() {
         task.cancel();
+    }
+
+    // 전체화면
+    @FXML
+    public void btnFullscreen_Clicked(){
+        if(grLabels[0] == null || grLabels[0].getText().equals(""))
+            return;
+        fl1.setText(grLabels[0].getText());
+        fl2.setText(grLabels[1].getText());
+        fl3.setText(grLabels[2].getText());
+        fl4.setText(grLabels[3].getText());
+        fl5.setText(grLabels[4].getText());
+        fl6.setText(grLabels[5].getText());
+        p6.setVisible(true);
+    }
+
+    // 전체화면 종료
+    @FXML
+    public void btnExitFull_Clicked(){
+        p6.setVisible(false);
     }
 }

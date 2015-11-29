@@ -118,6 +118,7 @@ public class Controller {
     @FXML protected ImageView btn_jojang;
     //endregion
 
+    // settings.ini에서 엑셀 파일들을 읽어와서 디렉터리 내부의 엑셀 파일들 출력
     public void setExcelFileAddress(String adr){
         file = new File(adr);
 
@@ -133,30 +134,38 @@ public class Controller {
         }
     }
 
+    // 랜덤파일1 주소 지정
     public void setRand1FileAddress(String adr){
         if(!adr.isEmpty())
             adr_rand1.setText(adr);
     }
 
+    // 랜덤파일2 주소 지정
     public void setRand2FileAddress(String adr){
         if(!adr.isEmpty())
             adr_rand2.setText(adr);
 
     }
 
+    // 메인화면 드래그 기능
     public void setDragFunction(Stage stage) {
         this.stage = stage;
 
+        // 클릭 시
         draggableImage.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                // 좌표 가져옴
                 xOffset = event.getSceneX();
                 yOffset = event.getSceneY();
             }
         });
+
+        // 드래그 시
         draggableImage.setOnMouseDragged(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                // 좌표 이동
                 stage.setX(event.getScreenX() - xOffset);
                 stage.setY(event.getScreenY() - yOffset);
             }
@@ -165,6 +174,7 @@ public class Controller {
 
     }
 
+    // 양파 드래그 앤 드롭 기능
     public void setDragOnion(Stage stage){
         //region VARS
         groups[0] = new StudentGroup();
@@ -203,13 +213,16 @@ public class Controller {
 
         for(int i=0; i<4; i++) {
             ImageView o = onions[i];
+            // 마우스 클릭 시
             o.setOnMousePressed(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
+                    // 양파 좌표 가져옴
                     xOffset = o.getLayoutX() + 60;
                     yOffset = o.getLayoutY() + 60;
                 }
             });
+            // 마우스 드래그 시
             o.setOnMouseDragged(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
@@ -220,14 +233,16 @@ public class Controller {
                     int o_y = (int)(o.getY() + o.getLayoutY()) + 60;
                     int b_x, b_y, b_w, b_h;
                     for(int i=0; i<6; i++) {
+                        // 양파 좌표 이동
                         b_x = (int)(boxes[i].getX() + boxes[i].getLayoutX());
                         b_y = (int)(boxes[i].getY() + boxes[i].getLayoutY());
                         b_h = (int)boxes[i].getFitHeight();
                         b_w = (int)boxes[i].getFitWidth();
+                        // 양파의 위치가 박스 위에 있으면
                         if((o_x - 3 <= b_x + b_w && o_x + 3 >= b_x) && (o_y - 3 <= b_y + b_h && o_y + 3 >= b_y)) {
                             colBox = i;
                         }
-                        if(i == colBox)
+                        if(i == colBox) // 박스 스타일 바꿈
                             boxes[i].setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);");
                         else
                             boxes[i].setStyle("");
@@ -235,6 +250,7 @@ public class Controller {
 
                 }
             });
+            // 마우스를 뗄 시
             o.setOnMouseReleased(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
@@ -246,11 +262,13 @@ public class Controller {
                         b_y = (int)(boxes[i].getY() + boxes[i].getLayoutY());
                         b_h = (int)boxes[i].getFitHeight();
                         b_w = (int)boxes[i].getFitWidth();
+                        // 양파가 박스 위에 있으면
                         if((o_x - 3 <= b_x + b_w && o_x + 3 >= b_x) && (o_y - 3 <= b_y + b_h && o_y + 3 >= b_y)) {
                             groups[i].plusOnion(o);
                             labels[i].setText(((groups[i].getOnion()>=0)?"+":"") + groups[i].getOnion() + "점");
                             tmpOnions[tmpOnion_cnt] = new ImageView();
                             tmpOnions[tmpOnion_cnt].setImage(o.getImage());
+                            // 박스에 양파 추가
                             p1.getChildren().add(tmpOnions[tmpOnion_cnt]);
                             tmpOnions[tmpOnion_cnt].setX(boxes[i].getLayoutX() + 10 + (groups[i].getOnion_cnt()-1) * 40);
                             tmpOnions[tmpOnion_cnt].setY(boxes[i].getLayoutY() + 8);
@@ -269,15 +287,18 @@ public class Controller {
         }
     }
 
+    // 종료 버튼
     @FXML
     public void btnExit_Clicked(Event event) {
         System.exit(0);
     }
 
+    // 최소화 버튼
     @FXML
     public void btnMin_Clicked(Event event) {
         stage.setIconified(true);}
 
+    // 그룹 지정 버튼
     @FXML
     public void btnSetGroup_Clicked(Event event){
 
@@ -294,6 +315,7 @@ public class Controller {
             list2.add(i);
         }
 
+        // 조장 고정 기능이 켜져 있으면
         if(ParalyzeLeader)
             for(int i = 5; i > -1; i--){
                 list.remove(jojang[i] - 1);
@@ -313,6 +335,7 @@ public class Controller {
             index++;
 
             if(jj == 5 && kk < 5) {
+                // 조장 고정 기능이 켜져 있으면
                 if(ParalyzeLeader){
                     int ind3x = rand.nextInt(list2.size());
                     ind3x = list2.remove(ind3x);
@@ -334,6 +357,7 @@ public class Controller {
                 jj = 0;
             }
             if(jj == 6 && kk == 5) {
+                // 조장 고정 기능이 켜져 있으면
                 if(ParalyzeLeader){
                     int ind3x = rand.nextInt(list2.size());
                     ind3x = list2.remove(ind3x);
@@ -355,6 +379,7 @@ public class Controller {
             }
         }
 
+        // 메인화면에 학생명 출력
         try {
             p1.getChildren().removeAll(grLabels);
             StringBuffer sb;
@@ -382,6 +407,7 @@ public class Controller {
     }
 
     //region Menu
+    // 메뉴 1
     @FXML
     public void menu1(Event event) {
         p1.setVisible(true);
@@ -391,6 +417,7 @@ public class Controller {
         p5.setVisible(false);
     }
 
+    // 메뉴 2
     @FXML
     public void menu2(Event event) {
         p1.setVisible(false);
@@ -400,6 +427,7 @@ public class Controller {
         p5.setVisible(false);
     }
 
+    // 메뉴 3
     @FXML
     public void menu3(Event event) {
         p1.setVisible(false);
@@ -409,6 +437,7 @@ public class Controller {
         p5.setVisible(false);
     }
 
+    // 메뉴 4
     @FXML
     public void menu4(Event event) {
         p1.setVisible(false);
@@ -419,6 +448,7 @@ public class Controller {
     }
     //endregion
 
+    // 양파
     @FXML
     public void btnOnion(Event event){
         draggableImage.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -437,6 +467,7 @@ public class Controller {
         });
     }
 
+    // 엑셀 저장 버튼
     @FXML
     public void btnExcel_Clicked(Event event) {
         String sheetname = TodayClass.getText();
@@ -448,6 +479,7 @@ public class Controller {
 
             sheet = workbook.createSheet(sheetname);
 
+            // sum sheet에서 학생정보 가져옴
             row = sheet.createRow(0);
             row.createCell(0).setCellValue("번호");
             row.createCell(1).setCellValue("학생명");

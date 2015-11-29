@@ -20,6 +20,7 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -44,6 +45,8 @@ public class Controller {
     int NumberOfStudents;
     int randnum[] = new int[45];
     int ii = 1, jj  = 0, kk = 0;
+
+    private boolean isClassEnd = false;
 
     private StudentGroup[] stdgroup = new StudentGroup[6];
 
@@ -384,6 +387,8 @@ public class Controller {
             g6_5.setText(groups[5].getStudent(4).getName());
             g6_6.setText(groups[5].getStudent(5).getName());
             g6_7.setText(groups[5].getStudent(6).getName());
+
+            isClassEnd = true;
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -457,7 +462,7 @@ public class Controller {
     @FXML
     public void btnExcel_Clicked(Event event) {
         String sheetname = TodayClass.getText();
-        if(!sheetname.isEmpty()) try {
+        if(!sheetname.isEmpty() && isClassEnd) try {
             String s = file.getAbsolutePath() + "/" + Class.getSelectionModel().getSelectedItem().toString() + ".xlsx";
 
             inFile = new FileInputStream(s);
@@ -495,6 +500,20 @@ public class Controller {
 
             workbook.write(outFile);
             workbook.close();
+
+            JSONObject jobj = new JSONObject();
+            JSONArray jsonarray = new JSONArray();
+            jobj.put("ExcelPath", adr_excel.getText());
+            jobj.put("Rand1", adr_rand1.getText());
+            jobj.put("Rand2", adr_rand2.getText());
+            for(int i = 0; i < TodayClassList.getItems().size(); i++)
+               jsonarray.add(TodayClassList.getItems().get(i));
+            jobj.put("ClassList", jsonarray);
+
+            FileWriter file = new FileWriter("settings.ini");
+            file.write(jobj.toJSONString());
+            file.flush();
+            file.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -579,9 +598,11 @@ public class Controller {
 
         try {
             JSONObject jobj = new JSONObject();
+            JSONArray jsonarray = new JSONArray();
             jobj.put("ExcelPath", adr_excel.getText());
             jobj.put("Rand1", adr_rand1.getText());
             jobj.put("Rand2", adr_rand2.getText());
+//            jsonarray.add();
 
             FileWriter file = new FileWriter("settings.ini");
             file.write(jobj.toJSONString());
@@ -627,6 +648,33 @@ public class Controller {
             } catch (NullPointerException e) {
                 System.out.println("No sheet");
             }
+
+            File excel;
+            byte[] bytes = new byte[100];
+            try {
+                excel = new File("settings.ini");
+
+                if (excel.exists()) {
+                    bytes = new byte[(int) excel.length()];
+
+                    try (BufferedInputStream is = new BufferedInputStream(new FileInputStream(excel))) {
+                        is.read(bytes);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            String setting = new String(bytes, 0, bytes.length);
+
+            JSONParser parser = new JSONParser();
+            JSONObject settings = (JSONObject)parser.parse(setting);
+            JSONArray todayclasslist = (JSONArray)settings.get("ClassList");
+//
+////            String[] string = todayclasslist.toArray( new String[todayclasslist.size()] );
+//
+//            for(int i = 0; i < string.length; i++)
+//                TodayClassList.getItems().add(string[i]);
         } catch (Exception e) {
             e.printStackTrace();
         }

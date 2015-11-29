@@ -40,6 +40,8 @@ public class StudentGroup {
         return onion_cnt;
     }
 
+    public void setOnion_cnt(int onion_cnt) { this.onion_cnt = onion_cnt; }
+
     public void plusOnion(ImageView o) {
         switch(o.getId()) {
             case "imgOnion1":

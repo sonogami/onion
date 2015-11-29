@@ -57,9 +57,11 @@ public class Controller {
     private int minn;
     private int secc;
 
-    private int grade_test = 2;
-    private int class_test = 1;
+    private int v = 0;
+
+    private boolean ParalyzeLeader = true;
     private int tmpOnion_cnt = 0;
+    private int[] jojang = new int[6];
 
     private StudentGroup[] groups = new StudentGroup[6];
     private Student[] students = new Student[45];
@@ -68,8 +70,6 @@ public class Controller {
     private ImageView[] boxes = new ImageView[6];
     private Label[] labels = new Label[6];
     private ImageView[] tmpOnions = new ImageView[100];
-
-    int random;
 
     //region FXML_varioubles
     @FXML protected ImageView draggableImage;
@@ -147,6 +147,7 @@ public class Controller {
     @FXML protected ComboBox Class2;
     @FXML protected TableView tbvStudents;
     @FXML protected TableView tbvStudents2;
+    @FXML protected ImageView btn_jojang;
     //endregion
 
     public void setExcelFileAddress(String adr){
@@ -287,7 +288,6 @@ public class Controller {
                             tmpOnions[tmpOnion_cnt].setY(boxes[i].getLayoutY() + 8);
                             tmpOnions[tmpOnion_cnt].setFitWidth(30);
                             tmpOnions[tmpOnion_cnt].setFitHeight(30);
-                            //p1.getChildren().removeAll(tmpOnions);
                             tmpOnion_cnt ++;
                             break;
                         }
@@ -314,30 +314,79 @@ public class Controller {
     public void btnSetGroup_Clicked(Event event){
 
         ArrayList<Integer> list = new ArrayList<Integer>(NumberOfStudents);
+        ArrayList<Integer> list2 = new ArrayList<Integer>(6);
+
+        Random rand = new Random();
+
         for(int i = 1; i <= NumberOfStudents; i++) {
             list.add(i);
         }
 
-        Random rand = new Random();
+        for(int i = 1; i <= 6; i++) {
+            list2.add(i);
+        }
+
+        if(ParalyzeLeader)
+            for(int i = 5; i > -1; i--){
+                list.remove(jojang[i] - 1);
+            }
 
         ArrayList<Student> listStudent = new ArrayList<Student>(7);
+
         while(list.size() > 0) {
             int index = rand.nextInt(list.size());
+
             index = list.remove(index);
 
             System.out.print(index + "\t");
 
-            listStudent.add(students[index - 1]);
-            jj++;
+            if((jj < 5 && kk < 5) || (jj < 6 && kk == 5)) {
+                listStudent.add(students[index - 1]);
+                jj++;
+            }
+            index++;
 
-            if(jj == 6 && kk < 5) {
+            if(jj == 5 && kk < 5) {
+                if(ParalyzeLeader){
+                    int ind3x = rand.nextInt(list2.size());
+                    ind3x = list2.remove(ind3x);
+                    ind3x = jojang[ind3x - 1];
+
+                    System.out.println(ind3x);
+                    listStudent.add(students[ind3x - 1]);
+                } else {
+                    index = rand.nextInt(list.size());
+
+                    index = list.remove(index);
+
+                    System.out.print(index + "\t");
+
+                    listStudent.add(students[index - 1]);
+                }
+
                 groups[kk].setStudents(listStudent.toArray(new Student[listStudent.size()]));
                 listStudent.clear();
-                System.out.println();
                 kk++;
                 jj = 0;
             }
-            if(jj == 7 && kk == 5) {
+            if(jj == 6 && kk == 5) {
+                if(ParalyzeLeader){
+                    int ind3x = rand.nextInt(list2.size());
+                    ind3x = list2.remove(ind3x);
+                    ind3x = jojang[ind3x - 1];
+
+                    System.out.println(ind3x);
+                    listStudent.add(students[ind3x - 1]);
+                } else {
+                    index = rand.nextInt(list.size());
+
+                    index = list.remove(index);
+
+                    System.out.print(index + "\t");
+
+                    listStudent.add(students[index - 1]);
+                }
+
                 groups[kk].setStudents(listStudent.toArray(new Student[listStudent.size()]));
                 listStudent.clear();
                 jj = 0;
@@ -503,13 +552,9 @@ public class Controller {
             workbook.close();
 
             JSONObject jobj = new JSONObject();
-            JSONArray jsonarray = new JSONArray();
             jobj.put("ExcelPath", adr_excel.getText());
             jobj.put("Rand1", adr_rand1.getText());
             jobj.put("Rand2", adr_rand2.getText());
-            for(int i = 0; i < TodayClassList.getItems().size(); i++)
-               jsonarray.add(TodayClassList.getItems().get(i));
-            jobj.put("ClassList", jsonarray);
 
             FileWriter file = new FileWriter("settings.ini");
             file.write(jobj.toJSONString());
@@ -603,7 +648,6 @@ public class Controller {
             jobj.put("ExcelPath", adr_excel.getText());
             jobj.put("Rand1", adr_rand1.getText());
             jobj.put("Rand2", adr_rand2.getText());
-//            jsonarray.add();
 
             FileWriter file = new FileWriter("settings.ini");
             file.write(jobj.toJSONString());
@@ -634,6 +678,11 @@ public class Controller {
             inFile = new FileInputStream(s);
             workbook = new XSSFWorkbook(inFile);
 
+            for(int i = 1 ; i < workbook.getNumberOfSheets(); i++){
+                sheet = workbook.getSheetAt(i);
+                TodayClassList.getItems().add(sheet.getSheetName());
+            }
+
             String sheetname = "sum";
             sheet = workbook.getSheet(sheetname);
 
@@ -646,42 +695,38 @@ public class Controller {
                     cell.setCellType(Cell.CELL_TYPE_STRING);
                     int num = Integer.parseInt(cell.getStringCellValue());
                     students[i - 1] = new Student(num, row.getCell(1).getStringCellValue(), 0);
+
+                    if(row.getCell(3).getStringCellValue().equals("o")){
+                        jojang[v] = num;
+                        v++;
+                    }
                 }
             } catch (NullPointerException e) {
                 System.out.println("No sheet");
             }
 
-            File excel;
-            byte[] bytes = new byte[100];
-            try {
-                excel = new File("settings.ini");
-
-                if (excel.exists()) {
-                    bytes = new byte[(int) excel.length()];
-
-                    try (BufferedInputStream is = new BufferedInputStream(new FileInputStream(excel))) {
-                        is.read(bytes);
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+            for(int i =0 ; i < 6; i++){
+                System.out.println(jojang[i]);
             }
 
-            String setting = new String(bytes, 0, bytes.length);
+            p1.getChildren().removeAll(tmpOnions);
 
-            JSONParser parser = new JSONParser();
-            JSONObject settings = (JSONObject)parser.parse(setting);
-            JSONArray todayclasslist = (JSONArray)settings.get("ClassList");
+            g1_1.setText("");g1_2.setText("");g1_3.setText("");g1_4.setText("");g1_5.setText("");g1_6.setText("");
+            g2_1.setText("");g2_2.setText("");g2_3.setText("");g2_4.setText("");g2_5.setText("");g2_6.setText("");
+            g3_1.setText("");g3_2.setText("");g3_3.setText("");g3_4.setText("");g3_5.setText("");g3_6.setText("");
+            g4_1.setText("");g4_2.setText("");g4_3.setText("");g4_4.setText("");g4_5.setText("");g4_6.setText("");
+            g5_1.setText("");g5_2.setText("");g5_3.setText("");g5_4.setText("");g5_5.setText("");g5_6.setText("");
+            g6_1.setText("");g6_2.setText("");g6_3.setText("");g6_4.setText("");g6_5.setText("");g6_6.setText("");g6_7.setText("");
 
+            TodayClass.setText("");
 
-            List<String> list = new ArrayList<String>(todayclasslist.size());
-            for(int i = 0; i < todayclasslist.size(); i++)
-                list.add(todayclasslist.get(i).toString());
+            for(int i = 0 ; i < 6; i++) {
+                groups[i].setOnion_cnt(0);
+                labels[i].setText("+0점");
+            }
 
-            String[] string = list.toArray(new String[list.size()]);
+            tmpOnion_cnt = 0;
 
-            for(int i = 0; i < string.length; i++)
-                TodayClassList.getItems().add(string[i]);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -777,5 +822,11 @@ public class Controller {
                 e.printStackTrace();
             }
         }
+    }
+
+    @FXML
+    public void btnJoJang_Clicked(){
+        ParalyzeLeader = !ParalyzeLeader;
+        btn_jojang.setRotate(180);
     }
 }

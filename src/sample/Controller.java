@@ -15,6 +15,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.poi.sl.usermodel.TextBox;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -23,6 +24,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Controller {
 
@@ -33,9 +36,14 @@ public class Controller {
     private Stage stage;
 
     InputStream inFile;
+    OutputStream outFile;
     XSSFWorkbook workbook;
     XSSFSheet sheet;
     XSSFRow row;
+
+    int NumberOfStudents;
+    int randnum[] = new int[45];
+    int ii = 1, jj  = 0, kk = 0;
 
     private StudentGroup[] stdgroup = new StudentGroup[6];
 
@@ -58,7 +66,7 @@ public class Controller {
     private ImageView[] tmpOnions = new ImageView[100];
 
     int random;
-    Student[] tempstd = new Student[6];
+    Student[][] tempstd = new Student[6][7];
 
     //region FXML_varioubles
     @FXML protected ImageView draggableImage;
@@ -129,60 +137,28 @@ public class Controller {
     @FXML protected Label g6_4;
     @FXML protected Label g6_5;
     @FXML protected Label g6_6;
+    @FXML protected Label g6_7;
     @FXML protected TextField TodayClass;
     @FXML protected ComboBox TodayClassList;
     @FXML protected ComboBox Class;
+    @FXML protected ComboBox Class2;
     @FXML protected TableView tbvStudents;
+    @FXML protected TableView tbvStudents2;
     //endregion
 
-    // 세이브를 제외한 엑셀 관련 기능은 이 함수 안으로 - ㄱㅁㅈ
     public void setExcelFileAddress(String adr){
         file = new File(adr);
 
         adr_excel.setText(file.getAbsolutePath());
 
-        try {
-            String s = file.getAbsolutePath() + "/" + grade_test + "-" + class_test + ".xlsx";
-
-            inFile = new FileInputStream(s);
-            workbook = new XSSFWorkbook(inFile);
-
-            String sheetname = grade_test + "-" + class_test;
-            sheet = workbook.getSheet(sheetname);
-
-            System.out.println(sheetname);
-            System.out.println(workbook);
-            System.out.println(sheet);
-            try {
-                for (int i = 1; i <= sheet.getPhysicalNumberOfRows(); i++) {
-                    row = sheet.getRow(i);
-                    Cell cell = row.getCell(0);
-                    cell.setCellType(Cell.CELL_TYPE_STRING);
-                    int num = Integer.parseInt(cell.getStringCellValue());
-                    students[i] = new Student(num, row.getCell(1).getStringCellValue(), 0);
-                }
-            } catch (NullPointerException e) {
-                System.out.println("No sheet");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        ObservableList<Student> data = FXCollections.observableArrayList();
-
-        for(int i = 1; i <= sheet.getPhysicalNumberOfRows(); i++){
-            data.add(students[i]);
-        }
-
-        ((TableColumn)tbvStudents.getColumns().get(0)).setCellValueFactory(new PropertyValueFactory<Student, Integer>("num"));
-        ((TableColumn)tbvStudents.getColumns().get(1)).setCellValueFactory(new PropertyValueFactory<Student, String>("name"));
-        ((TableColumn)tbvStudents.getColumns().get(2)).setCellValueFactory(new PropertyValueFactory<Student, Integer>("onion"));
-        tbvStudents.setItems(data);
-
         String[] directories = file.list();
 
-        for(int i = 1; i < directories.length - 1; i++)
-            Class.getItems().add(directories[i].substring(0, directories[i].length()-5));
+        for(int i = 1; i < directories.length - 1; i++) {
+            if(directories[i].contains(".xlsx")) {
+                Class.getItems().add(directories[i].substring(0, directories[i].length() - 5));
+                Class2.getItems().add(directories[i].substring(0, directories[i].length() - 5));
+            }
+        }
     }
 
     public void setRand1FileAddress(String adr){
@@ -333,13 +309,35 @@ public class Controller {
 
     @FXML
     public void btnSetGroup_Clicked(Event event){
-        for(int i = 0; i < 6; i++){
-            for(int j = 0; j < 6; j++) {
-                random = (int) (Math.random() * 37);
-                tempstd[j] = students[random];
-            }
-            groups[i].setStudents(tempstd);
+
+        ArrayList<Integer> list = new ArrayList<Integer>(NumberOfStudents);
+        for(int i = 1; i <= NumberOfStudents; i++) {
+            list.add(i);
         }
+
+        Random rand = new Random();
+        while(list.size() > 0) {
+            int index = rand.nextInt(list.size());
+            index = list.remove(index);
+
+            System.out.print(index + " ");
+
+            tempstd[kk][jj] = students[index - 1];
+            jj++;
+
+            if(jj == 6 && kk < 5) {
+                groups[kk].setStudents(tempstd[kk]);
+                tempstd[kk] = null;
+                System.out.println();
+                kk++;
+                jj = 0;
+            }
+            if(jj == 7 && kk == 5) {
+                groups[kk].setStudents(tempstd[kk]);
+                tempstd[kk] = null;
+            }
+        }
+
         try {
             g1_1.setText(groups[0].getStudent(0).getName());
             g1_2.setText(groups[0].getStudent(1).getName());
@@ -382,10 +380,10 @@ public class Controller {
             g6_4.setText(groups[5].getStudent(3).getName());
             g6_5.setText(groups[5].getStudent(4).getName());
             g6_6.setText(groups[5].getStudent(5).getName());
+            g6_7.setText(groups[5].getStudent(6).getName());
         } catch(Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @FXML
@@ -456,7 +454,50 @@ public class Controller {
     @FXML
     public void btnExcel_Clicked(Event event) {
         String sheetname = TodayClass.getText();
-        System.out.println(sheetname);
+        if(!sheetname.isEmpty()) try {
+            String s = file.getAbsolutePath() + "/" + Class.getSelectionModel().getSelectedItem().toString() + ".xlsx";
+
+            inFile = new FileInputStream(s);
+            workbook = new XSSFWorkbook(inFile);
+
+            sheet = workbook.createSheet(sheetname);
+
+            row = sheet.createRow(0);
+            row.createCell(0).setCellValue("번호");
+            row.createCell(1).setCellValue("학생명");
+            row.createCell(2).setCellValue("양파갯수");
+
+            for(int i = 0; i < 6; i++){
+                for(Student stu : groups[i].getStudents()){
+                    if(stu != null) {
+                        row = sheet.createRow(ii);
+                        row.createCell(0).setCellValue(stu.getNum());
+                        row.createCell(1).setCellValue(stu.getName());
+                        row.createCell(2).setCellValue(groups[i].getOnion());
+                        ii++;
+
+                        XSSFSheet sumsheet = workbook.getSheet("sum");
+                        XSSFRow sumrow = sumsheet.getRow(stu.getNum());
+                        XSSFCell cell = sumrow.getCell(2);
+                        cell.setCellType(Cell.CELL_TYPE_STRING);
+                        int num = Integer.parseInt(cell.getStringCellValue().substring(0,cell.getStringCellValue().length() - 2));
+
+                        cell.setCellValue(num + groups[i].getOnion());
+                    }
+                }
+                ii++;
+            }
+
+            outFile = new FileOutputStream(s);
+
+            workbook.write(outFile);
+            workbook.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        else {
+            System.out.println("Input ClassName");
+        }
     }
 
     @FXML
@@ -561,5 +602,86 @@ public class Controller {
     @FXML
     public void SelectClass(){
         Class.setPromptText(Class.getSelectionModel().getSelectedItem().toString());
+        try {
+            String s = file.getAbsolutePath() + "/" + Class.getSelectionModel().getSelectedItem().toString() + ".xlsx";
+
+            inFile = new FileInputStream(s);
+            workbook = new XSSFWorkbook(inFile);
+
+            String sheetname = "sum";
+            sheet = workbook.getSheet(sheetname);
+
+            NumberOfStudents = sheet.getPhysicalNumberOfRows() - 1;
+
+            try {
+                for (int i = 1; i <= NumberOfStudents; i++) {
+                    row = sheet.getRow(i);
+                    Cell cell = row.getCell(0);
+                    cell.setCellType(Cell.CELL_TYPE_STRING);
+                    int num = Integer.parseInt(cell.getStringCellValue());
+                    students[i - 1] = new Student(num, row.getCell(1).getStringCellValue(), 0);
+                }
+            } catch (NullPointerException e) {
+                System.out.println("No sheet");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void SelectClass2(){
+        Class2.setPromptText(Class2.getSelectionModel().getSelectedItem().toString());
+        try {
+            String s = file.getAbsolutePath() + "/" + Class2.getSelectionModel().getSelectedItem().toString() + ".xlsx";
+
+            inFile = new FileInputStream(s);
+            workbook = new XSSFWorkbook(inFile);
+
+            String sheetname = "sum";
+            sheet = workbook.getSheet(sheetname);
+
+            NumberOfStudents = sheet.getPhysicalNumberOfRows() - 1;
+
+            try {
+                for (int i = 1; i <= NumberOfStudents; i++) {
+                    row = sheet.getRow(i);
+                    Cell cell = row.getCell(0);
+                    cell.setCellType(Cell.CELL_TYPE_STRING);
+
+                    Cell cell2 = row.getCell(2);
+                    cell2.setCellType(Cell.CELL_TYPE_STRING);
+
+                    int num = Integer.parseInt(cell.getStringCellValue());
+                    int onion = Integer.parseInt(cell2.getStringCellValue().substring(0, cell2.getStringCellValue().length() - 2));
+                    students[i - 1] = new Student(num, row.getCell(1).getStringCellValue(), onion);
+                }
+            } catch (NullPointerException e) {
+                System.out.println("No sheet");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        ObservableList<Student> data = FXCollections.observableArrayList();
+        ObservableList<Student> data2 = FXCollections.observableArrayList();
+
+        for(int i = 1; i <= 20; i++){
+            data.add(students[i - 1]);
+        }
+
+        ((TableColumn)tbvStudents.getColumns().get(0)).setCellValueFactory(new PropertyValueFactory<Student, Integer>("num"));
+        ((TableColumn)tbvStudents.getColumns().get(1)).setCellValueFactory(new PropertyValueFactory<Student, String>("name"));
+        ((TableColumn)tbvStudents.getColumns().get(2)).setCellValueFactory(new PropertyValueFactory<Student, Integer>("onion"));
+        tbvStudents.setItems(data);
+
+        for(int i = 21; i <= sheet.getPhysicalNumberOfRows(); i++){
+            data2.add(students[i - 1]);
+        }
+
+        ((TableColumn)tbvStudents2.getColumns().get(0)).setCellValueFactory(new PropertyValueFactory<Student, Integer>("num"));
+        ((TableColumn)tbvStudents2.getColumns().get(1)).setCellValueFactory(new PropertyValueFactory<Student, String>("name"));
+        ((TableColumn)tbvStudents2.getColumns().get(2)).setCellValueFactory(new PropertyValueFactory<Student, Integer>("onion"));
+        tbvStudents2.setItems(data2);
     }
 }

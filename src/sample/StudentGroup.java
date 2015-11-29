@@ -7,9 +7,10 @@ import javafx.scene.image.ImageView;
  */
 
 public class StudentGroup {
-    private Student[] students;
+    private Student[] students = new Student[7];
     private int onion;
     private int onion_cnt;
+    private int NumOfStudents = 0;
 
     public Student getStudent(int i) {
         return students[i];
@@ -30,6 +31,10 @@ public class StudentGroup {
     public void setStudents(Student[] students) {
         this.students = students;
     }
+
+    public void addStudent(Student student) { students[NumOfStudents] = student; NumOfStudents++; }
+
+    public int getNumOfStudents() { return NumOfStudents; }
 
     public int getOnion_cnt() {
         return onion_cnt;

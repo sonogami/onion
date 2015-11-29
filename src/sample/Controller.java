@@ -66,7 +66,6 @@ public class Controller {
     private ImageView[] tmpOnions = new ImageView[100];
 
     int random;
-    Student[][] tempstd = new Student[6][7];
 
     //region FXML_varioubles
     @FXML protected ImageView draggableImage;
@@ -316,25 +315,29 @@ public class Controller {
         }
 
         Random rand = new Random();
+
+        ArrayList<Student> listStudent = new ArrayList<Student>(7);
         while(list.size() > 0) {
             int index = rand.nextInt(list.size());
             index = list.remove(index);
 
-            System.out.print(index + " ");
+            System.out.print(index + "\t");
 
-            tempstd[kk][jj] = students[index - 1];
+            listStudent.add(students[index - 1]);
             jj++;
 
             if(jj == 6 && kk < 5) {
-                groups[kk].setStudents(tempstd[kk]);
-                tempstd[kk] = null;
+                groups[kk].setStudents(listStudent.toArray(new Student[listStudent.size()]));
+                listStudent.clear();
                 System.out.println();
                 kk++;
                 jj = 0;
             }
             if(jj == 7 && kk == 5) {
-                groups[kk].setStudents(tempstd[kk]);
-                tempstd[kk] = null;
+                groups[kk].setStudents(listStudent.toArray(new Student[listStudent.size()]));
+                listStudent.clear();
+                jj = 0;
+                kk = 0;
             }
         }
 
@@ -653,7 +656,11 @@ public class Controller {
                     cell2.setCellType(Cell.CELL_TYPE_STRING);
 
                     int num = Integer.parseInt(cell.getStringCellValue());
-                    int onion = Integer.parseInt(cell2.getStringCellValue().substring(0, cell2.getStringCellValue().length() - 2));
+                    int onion;
+                    if(cell2.getStringCellValue().length() < 2)
+                        onion = Integer.parseInt(cell2.getStringCellValue());
+                    else
+                        onion = Integer.parseInt(cell2.getStringCellValue().substring(0, cell2.getStringCellValue().length() - 2));
                     students[i - 1] = new Student(num, row.getCell(1).getStringCellValue(), onion);
                 }
             } catch (NullPointerException e) {

@@ -224,7 +224,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ComboBox fx:id="Class" layoutX="381.0" layoutY="76.0" onAction="#SelectClass" prefHeight="28.0" prefWidth="87.0" style="-fx-background-color: #333; -fx-background-radius: 0;">
+            <ComboBox fx:id="Class" layoutX="381.0" layoutY="76.0" onAction="#SelectClass" prefHeight="28.0" prefWidth="87.0" style="-fx-background-color: #333; -fx-background-radius: 0; -fx-text-fill: white;">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -285,7 +285,7 @@
                   <Image url="@../image/pane_main/labelClass.png" />
                </image>
             </ImageView>
-            <ComboBox fx:id="Class2" layoutX="364.0" layoutY="89.0" onAction="#SelectClass2" prefHeight="28.0" prefWidth="87.0" style="-fx-background-color: #333; -fx-background-radius: 0;">
+            <ComboBox fx:id="Class2" layoutX="364.0" layoutY="89.0" onAction="#SelectClass2" prefHeight="28.0" prefWidth="87.0" style="-fx-background-color: #333; -fx-background-radius: 0; -fx-text-fill: white;">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

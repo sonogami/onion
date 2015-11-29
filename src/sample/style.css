@@ -1,3 +1,7 @@
 .combo-box .arrow {
     -fx-background-color: white;
 }
+
+.combo-box .label {
+    -fx-text-fill: white;
+}

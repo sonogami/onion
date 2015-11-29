@@ -233,17 +233,17 @@
          </children></Pane>
       <Pane id="p2" fx:id="p2" layoutX="0.0" layoutY="0.0" prefHeight="733.0" prefWidth="1100.0" visible="false">
          <children>
-            <ImageView fx:id="flash1" fitHeight="244.0" fitWidth="311.0" layoutX="330.0" layoutY="253.0" onMouseClicked="#btnFlash1_Clicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="flash1" fitHeight="300.0" fitWidth="300.0" layoutX="330.0" layoutY="253.0" onMouseClicked="#btnFlash1_Clicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/pane_flash/imsi1.png" />
+                  <Image url="@../image/pane_flash/imsi1.jpg" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="flash2" fitHeight="244.0" fitWidth="311.0" layoutX="720.0" layoutY="253.0" onMouseClicked="#btnFlash2_Clicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="flash2" fitHeight="300.0" fitWidth="300.0" layoutX="720.0" layoutY="253.0" onMouseClicked="#btnFlash2_Clicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/pane_flash/imsi2.png" />
+                  <Image url="@../image/pane_flash/imsi2.jpeg" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />

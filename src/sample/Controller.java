@@ -8,6 +8,8 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -26,6 +28,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -781,17 +784,13 @@ public class Controller {
     // 플래시1 실행
     @FXML
     public void btnFlash1_Clicked(){
-        System.out.println("bt1 Clicked");
-        if(!adr_rand1.getText().isEmpty()) {
-            try {
-                Runtime rt = Runtime.getRuntime();
-                Process p;
-
-                p = rt.exec("start " + adr_rand1.getText());
-                p.waitFor();
-            } catch(Exception e){
-                e.printStackTrace();
+        try {
+            File flashfile = new File(adr_rand1.getText());
+            if (Desktop.isDesktopSupported()) {
+                Desktop.getDesktop().open(flashfile);
             }
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
 

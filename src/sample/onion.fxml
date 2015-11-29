@@ -279,7 +279,7 @@
          </children></Pane>
       <Pane id="p4" fx:id="p4" layoutX="0.0" layoutY="0.0" prefHeight="733.0" prefWidth="1100.0" visible="false">
          <children>
-            <Label fx:id="lblTimer2" alignment="CENTER" layoutX="415.0" layoutY="196.0" prefHeight="139.0" prefWidth="507.0" text="00:00:00">
+            <Label fx:id="lblTimer" alignment="CENTER" layoutX="415.0" layoutY="196.0" prefHeight="139.0" prefWidth="507.0" text="00:00:00">
                <font>
                   <Font name="System Bold" size="80.0" />
                </font>

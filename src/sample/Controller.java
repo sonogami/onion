@@ -59,9 +59,9 @@ public class Controller {
     private boolean rotated = false;
 
 
-    private int minn;
-    private int secc;
-    private int hour;
+    private int minn = 0;
+    private int secc = 0;
+    private int hour = 0;
 
     private String s;
 

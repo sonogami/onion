@@ -26,6 +26,7 @@ import org.json.simple.parser.JSONParser;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Controller {
@@ -670,11 +671,16 @@ public class Controller {
             JSONParser parser = new JSONParser();
             JSONObject settings = (JSONObject)parser.parse(setting);
             JSONArray todayclasslist = (JSONArray)settings.get("ClassList");
-//
-////            String[] string = todayclasslist.toArray( new String[todayclasslist.size()] );
-//
-//            for(int i = 0; i < string.length; i++)
-//                TodayClassList.getItems().add(string[i]);
+
+
+            List<String> list = new ArrayList<String>(todayclasslist.size());
+            for(int i = 0; i < todayclasslist.size(); i++)
+                list.add(todayclasslist.get(i).toString());
+
+            String[] string = list.toArray(new String[list.size()]);
+
+            for(int i = 0; i < string.length; i++)
+                TodayClassList.getItems().add(string[i]);
         } catch (Exception e) {
             e.printStackTrace();
         }

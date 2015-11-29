@@ -787,7 +787,7 @@ public class Controller {
                 Runtime rt = Runtime.getRuntime();
                 Process p;
 
-                p = rt.exec(adr_rand1.getText());
+                p = rt.exec("start " + adr_rand1.getText());
                 p.waitFor();
             } catch(Exception e){
                 e.printStackTrace();
@@ -804,7 +804,7 @@ public class Controller {
                 Runtime rt = Runtime.getRuntime();
                 Process p;
 
-                p = rt.exec(adr_rand2.getText());
+                p = rt.exec("start " + adr_rand2.getText());
                 p.waitFor();
             } catch(Exception e){
                 e.printStackTrace();

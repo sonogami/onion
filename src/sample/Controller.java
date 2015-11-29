@@ -745,4 +745,36 @@ public class Controller {
         ((TableColumn)tbvStudents2.getColumns().get(2)).setCellValueFactory(new PropertyValueFactory<Student, Integer>("onion"));
         tbvStudents2.setItems(data2);
     }
+
+    @FXML
+    public void btnFlash1_Clicked(){
+        System.out.println("bt1 Clicked");
+        if(!adr_rand1.getText().isEmpty()) {
+            try {
+                Runtime rt = Runtime.getRuntime();
+                Process p;
+
+                p = rt.exec(adr_rand1.getText());
+                p.waitFor();
+            } catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
+    public void btnFlash2_Clicked(){
+        System.out.println("bt2 Clicked");
+        if(!adr_rand2.getText().isEmpty()) {
+            try {
+                Runtime rt = Runtime.getRuntime();
+                Process p;
+
+                p = rt.exec(adr_rand2.getText());
+                p.waitFor();
+            } catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
 }

@@ -797,17 +797,13 @@ public class Controller {
     // 플래시2 실행
     @FXML
     public void btnFlash2_Clicked(){
-        System.out.println("bt2 Clicked");
-        if(!adr_rand2.getText().isEmpty()) {
-            try {
-                Runtime rt = Runtime.getRuntime();
-                Process p;
-
-                p = rt.exec("start " + adr_rand2.getText());
-                p.waitFor();
-            } catch(Exception e){
-                e.printStackTrace();
+        try {
+            File flashfile = new File(adr_rand2.getText());
+            if (Desktop.isDesktopSupported()) {
+                Desktop.getDesktop().open(flashfile);
             }
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
 

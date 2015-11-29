@@ -53,6 +53,8 @@ public class Controller {
 
     private double xOffset = 0;
     private double yOffset = 0;
+    private boolean rotated = false;
+
 
     private int minn;
     private int secc;
@@ -70,6 +72,7 @@ public class Controller {
     private ImageView[] boxes = new ImageView[6];
     private Label[] labels = new Label[6];
     private ImageView[] tmpOnions = new ImageView[100];
+    private Label[] grLabels = new Label[6];
 
     //region FXML_varioubles
     @FXML protected ImageView draggableImage;
@@ -104,43 +107,6 @@ public class Controller {
     @FXML protected Label adr_excel;
     @FXML protected Label adr_rand1;
     @FXML protected Label adr_rand2;
-    @FXML protected Label g1_1;
-    @FXML protected Label g1_2;
-    @FXML protected Label g1_3;
-    @FXML protected Label g1_4;
-    @FXML protected Label g1_5;
-    @FXML protected Label g1_6;
-    @FXML protected Label g2_1;
-    @FXML protected Label g2_2;
-    @FXML protected Label g2_3;
-    @FXML protected Label g2_4;
-    @FXML protected Label g2_5;
-    @FXML protected Label g2_6;
-    @FXML protected Label g3_1;
-    @FXML protected Label g3_2;
-    @FXML protected Label g3_3;
-    @FXML protected Label g3_4;
-    @FXML protected Label g3_5;
-    @FXML protected Label g3_6;
-    @FXML protected Label g4_1;
-    @FXML protected Label g4_2;
-    @FXML protected Label g4_3;
-    @FXML protected Label g4_4;
-    @FXML protected Label g4_5;
-    @FXML protected Label g4_6;
-    @FXML protected Label g5_1;
-    @FXML protected Label g5_2;
-    @FXML protected Label g5_3;
-    @FXML protected Label g5_4;
-    @FXML protected Label g5_5;
-    @FXML protected Label g5_6;
-    @FXML protected Label g6_1;
-    @FXML protected Label g6_2;
-    @FXML protected Label g6_3;
-    @FXML protected Label g6_4;
-    @FXML protected Label g6_5;
-    @FXML protected Label g6_6;
-    @FXML protected Label g6_7;
     @FXML protected TextField TodayClass;
     @FXML protected ComboBox TodayClassList;
     @FXML protected ComboBox Class;
@@ -338,8 +304,6 @@ public class Controller {
 
             index = list.remove(index);
 
-            System.out.print(index + "\t");
-
             if((jj < 5 && kk < 5) || (jj < 6 && kk == 5)) {
                 listStudent.add(students[index - 1]);
                 jj++;
@@ -352,14 +316,12 @@ public class Controller {
                     ind3x = list2.remove(ind3x);
                     ind3x = jojang[ind3x - 1];
 
-                    System.out.println(ind3x);
                     listStudent.add(students[ind3x - 1]);
                 } else {
                     index = rand.nextInt(list.size());
 
                     index = list.remove(index);
 
-                    System.out.print(index + "\t");
 
                     listStudent.add(students[index - 1]);
                 }
@@ -375,14 +337,11 @@ public class Controller {
                     ind3x = list2.remove(ind3x);
                     ind3x = jojang[ind3x - 1];
 
-                    System.out.println(ind3x);
                     listStudent.add(students[ind3x - 1]);
                 } else {
                     index = rand.nextInt(list.size());
 
                     index = list.remove(index);
-
-                    System.out.print(index + "\t");
 
                     listStudent.add(students[index - 1]);
                 }
@@ -395,48 +354,24 @@ public class Controller {
         }
 
         try {
-            g1_1.setText(groups[0].getStudent(0).getName());
-            g1_2.setText(groups[0].getStudent(1).getName());
-            g1_3.setText(groups[0].getStudent(2).getName());
-            g1_4.setText(groups[0].getStudent(3).getName());
-            g1_5.setText(groups[0].getStudent(4).getName());
-            g1_6.setText(groups[0].getStudent(5).getName());
-
-            g2_1.setText(groups[1].getStudent(0).getName());
-            g2_2.setText(groups[1].getStudent(1).getName());
-            g2_3.setText(groups[1].getStudent(2).getName());
-            g2_4.setText(groups[1].getStudent(3).getName());
-            g2_5.setText(groups[1].getStudent(4).getName());
-            g2_6.setText(groups[1].getStudent(5).getName());
-
-            g3_1.setText(groups[2].getStudent(0).getName());
-            g3_2.setText(groups[2].getStudent(1).getName());
-            g3_3.setText(groups[2].getStudent(2).getName());
-            g3_4.setText(groups[2].getStudent(3).getName());
-            g3_5.setText(groups[2].getStudent(4).getName());
-            g3_6.setText(groups[2].getStudent(5).getName());
-
-            g4_1.setText(groups[3].getStudent(0).getName());
-            g4_2.setText(groups[3].getStudent(1).getName());
-            g4_3.setText(groups[3].getStudent(2).getName());
-            g4_4.setText(groups[3].getStudent(3).getName());
-            g4_5.setText(groups[3].getStudent(4).getName());
-            g4_6.setText(groups[3].getStudent(5).getName());
-
-            g5_1.setText(groups[4].getStudent(0).getName());
-            g5_2.setText(groups[4].getStudent(1).getName());
-            g5_3.setText(groups[4].getStudent(2).getName());
-            g5_4.setText(groups[4].getStudent(3).getName());
-            g5_5.setText(groups[4].getStudent(4).getName());
-            g5_6.setText(groups[4].getStudent(5).getName());
-
-            g6_1.setText(groups[5].getStudent(0).getName());
-            g6_2.setText(groups[5].getStudent(1).getName());
-            g6_3.setText(groups[5].getStudent(2).getName());
-            g6_4.setText(groups[5].getStudent(3).getName());
-            g6_5.setText(groups[5].getStudent(4).getName());
-            g6_6.setText(groups[5].getStudent(5).getName());
-            g6_7.setText(groups[5].getStudent(6).getName());
+            p1.getChildren().removeAll(grLabels);
+            StringBuffer sb;
+            for (int i = 0; i < 6; i++)
+                grLabels[i] = new Label();
+            p1.getChildren().addAll(grLabels);
+            for (int i = 0; i < 6; i++) {
+                sb = new StringBuffer();
+                for (int j = 5; j >= 0; j--) {
+                    if(i < 5)
+                        sb.append(groups[i].getStudent(j).getName() + "   ");
+                    else
+                        sb.append(groups[i].getStudent(j+1).getName() + "   ");
+                }
+                grLabels[i].setText(sb.toString());
+                grLabels[i].setLayoutX(361);
+                grLabels[i].setLayoutY(242 + 80*i);
+            }
+            grLabels[5].setText(grLabels[5].getText() + groups[5].getStudent(0).getName());
 
             isClassEnd = true;
         } catch(Exception e) {
@@ -710,14 +645,7 @@ public class Controller {
             }
 
             p1.getChildren().removeAll(tmpOnions);
-
-            g1_1.setText("");g1_2.setText("");g1_3.setText("");g1_4.setText("");g1_5.setText("");g1_6.setText("");
-            g2_1.setText("");g2_2.setText("");g2_3.setText("");g2_4.setText("");g2_5.setText("");g2_6.setText("");
-            g3_1.setText("");g3_2.setText("");g3_3.setText("");g3_4.setText("");g3_5.setText("");g3_6.setText("");
-            g4_1.setText("");g4_2.setText("");g4_3.setText("");g4_4.setText("");g4_5.setText("");g4_6.setText("");
-            g5_1.setText("");g5_2.setText("");g5_3.setText("");g5_4.setText("");g5_5.setText("");g5_6.setText("");
-            g6_1.setText("");g6_2.setText("");g6_3.setText("");g6_4.setText("");g6_5.setText("");g6_6.setText("");g6_7.setText("");
-
+            p1.getChildren().removeAll(grLabels);
             TodayClass.setText("");
 
             for(int i = 0 ; i < 6; i++) {
@@ -827,6 +755,12 @@ public class Controller {
     @FXML
     public void btnJoJang_Clicked(){
         ParalyzeLeader = !ParalyzeLeader;
-        btn_jojang.setRotate(180);
+        if(!rotated) {
+            btn_jojang.setRotate(180);
+        } else {
+            btn_jojang.setRotate(0);
+        }
+
+        rotated = !rotated;
     }
 }

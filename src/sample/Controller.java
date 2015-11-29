@@ -386,6 +386,7 @@ public class Controller {
         System.out.println(minText + "분 " + secText + "초");
         minn = 0;
         secc = 0;
+        System.out.println("rr");
     }
 
     //region Menu

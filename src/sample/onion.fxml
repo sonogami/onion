@@ -230,43 +230,6 @@
                </cursor>
             </ComboBox>
             <TextField fx:id="TodayClass" layoutX="620.0" layoutY="76.0" onAction="#SetTodayClass" prefHeight="29.0" prefWidth="106.0" style="-fx-border-color: #333; -fx-background-color: #333; -fx-text-fill: white;" />
-            <Label fx:id="g1_1" layoutX="361.0" layoutY="242.0" />
-            <Label fx:id="g1_2" layoutX="411.0" layoutY="242.0" />
-            <Label fx:id="g1_3" layoutX="461.0" layoutY="242.0" />
-            <Label fx:id="g1_4" layoutX="511.0" layoutY="242.0" />
-            <Label fx:id="g1_5" layoutX="561.0" layoutY="242.0" />
-            <Label fx:id="g1_6" layoutX="611.0" layoutY="242.0" />
-            <Label fx:id="g2_1" layoutX="361.0" layoutY="321.0" />
-            <Label fx:id="g2_2" layoutX="411.0" layoutY="321.0" />
-            <Label fx:id="g2_3" layoutX="461.0" layoutY="321.0" />
-            <Label fx:id="g2_4" layoutX="511.0" layoutY="321.0" />
-            <Label fx:id="g2_5" layoutX="561.0" layoutY="321.0" />
-            <Label fx:id="g2_6" layoutX="611.0" layoutY="321.0" />
-            <Label fx:id="g3_1" layoutX="361.0" layoutY="397.0" />
-            <Label fx:id="g3_2" layoutX="411.0" layoutY="397.0" />
-            <Label fx:id="g3_3" layoutX="461.0" layoutY="397.0" />
-            <Label fx:id="g3_4" layoutX="511.0" layoutY="397.0" />
-            <Label fx:id="g3_5" layoutX="561.0" layoutY="397.0" />
-            <Label fx:id="g3_6" layoutX="611.0" layoutY="397.0" />
-            <Label fx:id="g4_1" layoutX="361.0" layoutY="477.0" />
-            <Label fx:id="g4_2" layoutX="411.0" layoutY="477.0" />
-            <Label fx:id="g4_3" layoutX="461.0" layoutY="477.0" />
-            <Label fx:id="g4_4" layoutX="511.0" layoutY="477.0" />
-            <Label fx:id="g4_5" layoutX="561.0" layoutY="477.0" />
-            <Label fx:id="g4_6" layoutX="611.0" layoutY="477.0" />
-            <Label fx:id="g5_1" layoutX="361.0" layoutY="555.0" />
-            <Label fx:id="g5_2" layoutX="411.0" layoutY="555.0" />
-            <Label fx:id="g5_3" layoutX="461.0" layoutY="555.0" />
-            <Label fx:id="g5_4" layoutX="511.0" layoutY="555.0" />
-            <Label fx:id="g5_5" layoutX="561.0" layoutY="555.0" />
-            <Label fx:id="g5_6" layoutX="611.0" layoutY="555.0" />
-            <Label fx:id="g6_1" layoutX="361.0" layoutY="635.0" />
-            <Label fx:id="g6_2" layoutX="411.0" layoutY="635.0" />
-            <Label fx:id="g6_3" layoutX="461.0" layoutY="635.0" />
-            <Label fx:id="g6_4" layoutX="511.0" layoutY="635.0" />
-            <Label fx:id="g6_5" layoutX="561.0" layoutY="635.0" />
-            <Label fx:id="g6_6" layoutX="611.0" layoutY="635.0" />
-            <Label fx:id="g6_7" layoutX="661.0" layoutY="635.0" />
          </children></Pane>
       <Pane id="p2" fx:id="p2" layoutX="0.0" layoutY="0.0" prefHeight="733.0" prefWidth="1100.0" visible="false">
          <children>

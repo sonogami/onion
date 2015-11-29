@@ -76,6 +76,10 @@ public class Controller {
     private ImageView[] tmpOnions = new ImageView[100];
     private Label[] grLabels = new Label[6];
 
+    private int hour=0, minn=0, secc=0;
+
+    private Task<Void> task;
+
     //region FXML_varioubles
     @FXML protected ImageView draggableImage;
     @FXML protected ImageView onion1;
@@ -100,6 +104,7 @@ public class Controller {
     @FXML protected ImageView Box4;
     @FXML protected ImageView Box5;
     @FXML protected ImageView Box6;
+    @FXML protected Label lblTimer;
     @FXML protected Label lblGroup1;
     @FXML protected Label lblGroup2;
     @FXML protected Label lblGroup3;
@@ -324,6 +329,7 @@ public class Controller {
         ArrayList<Student> listStudent = new ArrayList<Student>(7);
 
         while(list.size() > 0) {
+            // 숫자 랜덤으로 가져옴
             int index = rand.nextInt(list.size());
 
             index = list.remove(index);
@@ -486,14 +492,18 @@ public class Controller {
             row.createCell(2).setCellValue("양파갯수");
 
             for(int i = 0; i < 6; i++){
+                // 그룹별로 저장
                 for(Student stu : groups[i].getStudents()){
                     if(stu != null) {
                         row = sheet.createRow(ii);
+
+                        // 번호, 이름 및 양파 갯수 저장
                         row.createCell(0).setCellValue(stu.getNum());
                         row.createCell(1).setCellValue(stu.getName());
                         row.createCell(2).setCellValue(groups[i].getOnion());
                         ii++;
 
+                        // sum에 양파 갯수 변동 반영
                         XSSFSheet sumsheet = workbook.getSheet("sum");
                         XSSFRow sumrow = sumsheet.getRow(stu.getNum());
                         XSSFCell cell = sumrow.getCell(2);
@@ -506,11 +516,13 @@ public class Controller {
                 ii++;
             }
 
+            // 출력
             outFile = new FileOutputStream(s);
 
             workbook.write(outFile);
             workbook.close();
 
+            // settings.ini 업데이트
             JSONObject jobj = new JSONObject();
             jobj.put("ExcelPath", adr_excel.getText());
             jobj.put("Rand1", adr_rand1.getText());
@@ -523,11 +535,12 @@ public class Controller {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        else {
+        else { // 오늘의 수업 명이 입력되지 않았을 시
             System.out.println("Input ClassName");
         }
     }
 
+    // 엑셀 파일 디렉터리 선택
     @FXML
     public void btnSetExcel_Clicked(Event event) {
         DirectoryChooser direcChooser = new DirectoryChooser();
@@ -536,6 +549,7 @@ public class Controller {
         if(file != null) adr_excel.setText(file.getAbsolutePath());
     }
 
+    // 랜덤파일(플래시) 선택
     @FXML
     public void btnRandFile1_Clicked(Event event){
         try {
@@ -554,6 +568,7 @@ public class Controller {
         }
     }
 
+    // 위 함수와 동일
     @FXML
     public void btnRandFile2_Clicked(Event event) {
         try {
@@ -572,7 +587,7 @@ public class Controller {
         }
     }
 
-
+    // 설정 메뉴
     @FXML
     public void Settings_Clicked(Event event){
         p1.setVisible(false);
@@ -582,6 +597,7 @@ public class Controller {
         p5.setVisible(true);
     }
 
+    // settings.ini 저장
     @FXML
     public void btnSaveS_Clicked(){
         File excel;
@@ -618,23 +634,28 @@ public class Controller {
         }
     }
 
+    // 오늘의 수업명
     @FXML
     public void SetTodayClass(){
         TodayClassList.getItems().add(TodayClass.getText());
         //asdasd
     }
 
+    // 수업 선택
     @FXML
     public void SelectTodayClass(){
         TodayClass.setText(TodayClassList.getSelectionModel().getSelectedItem().toString());
     }
 
+    // 수업하는 반(엑셀파일) 선택
     @FXML
     public void SelectClass(){
         Class.setPromptText(Class.getSelectionModel().getSelectedItem().toString());
         try {
+            // 디렉토리에서 엑셀파일 선택
             String s = file.getAbsolutePath() + "/" + Class.getSelectionModel().getSelectedItem().toString() + ".xlsx";
 
+            // read
             inFile = new FileInputStream(s);
             workbook = new XSSFWorkbook(inFile);
 
@@ -669,6 +690,7 @@ public class Controller {
                 System.out.println(jojang[i]);
             }
 
+            // 메인화면 초기화
             p1.getChildren().removeAll(tmpOnions);
             p1.getChildren().removeAll(grLabels);
             TodayClass.setText("");
@@ -685,6 +707,7 @@ public class Controller {
         }
     }
 
+    // 반 선택 in 전체학생 조회
     @FXML
     public void SelectClass2(){
         Class2.setPromptText(Class2.getSelectionModel().getSelectedItem().toString());
@@ -726,10 +749,12 @@ public class Controller {
         ObservableList<Student> data = FXCollections.observableArrayList();
         ObservableList<Student> data2 = FXCollections.observableArrayList();
 
+        // 20개 단위로 저장
         for(int i = 1; i <= 20; i++){
             data.add(students[i - 1]);
         }
 
+        // TableView에 출력
         ((TableColumn)tbvStudents.getColumns().get(0)).setCellValueFactory(new PropertyValueFactory<Student, Integer>("num"));
         ((TableColumn)tbvStudents.getColumns().get(1)).setCellValueFactory(new PropertyValueFactory<Student, String>("name"));
         ((TableColumn)tbvStudents.getColumns().get(2)).setCellValueFactory(new PropertyValueFactory<Student, Integer>("onion"));
@@ -739,12 +764,14 @@ public class Controller {
             data2.add(students[i - 1]);
         }
 
+        // TableView에 출력
         ((TableColumn)tbvStudents2.getColumns().get(0)).setCellValueFactory(new PropertyValueFactory<Student, Integer>("num"));
         ((TableColumn)tbvStudents2.getColumns().get(1)).setCellValueFactory(new PropertyValueFactory<Student, String>("name"));
         ((TableColumn)tbvStudents2.getColumns().get(2)).setCellValueFactory(new PropertyValueFactory<Student, Integer>("onion"));
         tbvStudents2.setItems(data2);
     }
 
+    // 플래시1 실행
     @FXML
     public void btnFlash1_Clicked(){
         System.out.println("bt1 Clicked");
@@ -761,6 +788,7 @@ public class Controller {
         }
     }
 
+    // 플래시2 실행
     @FXML
     public void btnFlash2_Clicked(){
         System.out.println("bt2 Clicked");
@@ -777,6 +805,7 @@ public class Controller {
         }
     }
 
+    // 조장 고정 버튼
     @FXML
     public void btnJoJang_Clicked(){
         ParalyzeLeader = !ParalyzeLeader;
@@ -788,18 +817,21 @@ public class Controller {
 
         rotated = !rotated;
     }
-    @FXML
-    private Label lblTimer2;
-    private int hour2=0, min2=0, sec2=0;
 
-    private Task<Void> task2;
 
+    // 타이머 시작
     @FXML
     public void btnStart_Clicked() {
-        min2 = Integer.parseInt(min.getText());
-        sec2 = Integer.parseInt(sec.getText());
+        if(task != null && task.isRunning())
+            return;
 
-        task2 = new Task<Void>() {
+        minn = Integer.parseInt(min.getText());
+        secc = Integer.parseInt(sec.getText());
+
+        minn += secc / 60;
+        secc %= 60;
+
+        task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
                 while(true) {
@@ -808,11 +840,11 @@ public class Controller {
                         break;
                     }
 
-                    sec2--;
-                    if(sec2 < 0) { min2--; sec2=59; }
-                    if(min2 < 0) { hour2--; min2=59; }
+                    secc--;
+                    if(secc < 0) { minn--; secc=59; }
+                    if(minn < 0) { hour--; minn=59; }
 
-                    String timerText = String.format("%02d:%02d:%02d", hour2, min2, sec2);
+                    String timerText = String.format("%02d:%02d:%02d", hour, minn, secc);
                     updateMessage(timerText);
 
                     try {
@@ -827,13 +859,15 @@ public class Controller {
             }
         };
 
-        lblTimer2.textProperty().bind(task2.messageProperty());
+        lblTimer.textProperty().bind(task.messageProperty());
 
-        Thread thread = new Thread(task2);
+        Thread thread = new Thread(task);
         thread.start();
     }
+
+    // 타이머 종료
     @FXML
     public void btnStop_Clicked() {
-        task2.cancel();
+        task.cancel();
     }
 }

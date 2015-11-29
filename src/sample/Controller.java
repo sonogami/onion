@@ -617,6 +617,7 @@ public class Controller {
     @FXML
     public void SetTodayClass(){
         TodayClassList.getItems().add(TodayClass.getText());
+        //asdasd
     }
 
     @FXML
